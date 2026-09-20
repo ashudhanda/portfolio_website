@@ -3,6 +3,14 @@ import * as React from "react"
 
 const MOBILE_BREAKPOINT = 768
 
+/**
+ * useIsMobile
+ *
+ * Returns true when the viewport width is below the mobile breakpoint
+ * (768px, checked via a `(max-width: 767px)` media query). Uses a
+ * matchMedia "change" listener with a window-resize fallback for older
+ * browsers, and removes the listener on unmount.
+ */
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean>(false)
 
@@ -42,6 +50,13 @@ export function useIsMobile() {
   return isMobile
 }
 
+/**
+ * useViewportSize
+ *
+ * Returns the current viewport dimensions as `{ width, height }`, refreshed
+ * on every window resize. Initializes to `{ width: 0, height: 0 }` until the
+ * first measurement runs after mount.
+ */
 // Export a hook to get the current viewport dimensions
 export function useViewportSize() {
   const [size, setSize] = React.useState({ width: 0, height: 0 })
