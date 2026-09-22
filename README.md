@@ -10,7 +10,6 @@ This portfolio is more than just a webpage — it's a complete showcase of my jo
 ## 🔥 Features
 
 - 🎨 Beautiful UI/UX with **Dark/Light Mode Toggle**
-<<<<<<< HEAD
 - 📱 Fully responsive across all devices (320px - 2xl)
 - 💬 Chat Section with several sections
 - 🎬 Animated GIFs
@@ -24,20 +23,6 @@ This portfolio is more than just a webpage — it's a complete showcase of my jo
   - Live Demo Links
   - GitHub Repository Links
   - Dynamic Tech Stack Tags with vibrant colors
-=======
-- 📱 Fully responsive across all devices
--  A Chat Section With Several sections😁😁😁😁😁😁😁😁
--  Gifs 
-- 📜 About Me & Career Journey Timeline
-- 🧠 Technical Skills Overview with Progress Bars
-- 🏆 Certifications Section
-- ✍️ Integrated Blog Highlights & Blog Section
-- 💼 Project Portfolio with:
-  - Rich Descriptions
-  - Live Demo Link
-  - GitHub Repository Link
-  - Stack Tags
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
 - 🎓 Education History Section
 - 🧭 Career Timeline
 - 💬 Testimonials Carousel
@@ -53,10 +38,6 @@ This portfolio is more than just a webpage — it's a complete showcase of my jo
 - 📌 Sticky Navbar & Smooth Scrolling
 - 🔗 External Link Previews (with rich cards)
 - 🧠 Clean and maintainable TypeScript Codebase
-<<<<<<< HEAD
-=======
-- Added Pricing Info
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
 
 ---
 
@@ -101,11 +82,7 @@ git clone https://github.com/mwakidenis/portfolio_website.git
 ### Step 2: Navigate to the project folder
 
 ```bash
-<<<<<<< HEAD
 cd portfolio_website-main
-=======
-cd mwakidenis-portfolio
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
 ```
 
 ### Step 3: Install dependencies
@@ -114,7 +91,6 @@ cd mwakidenis-portfolio
 npm install
 ```
 
-<<<<<<< HEAD
 ### Step 4: Create environment variables
 
 Create a `.env` file in the root directory:
@@ -125,9 +101,6 @@ VITE_GITHUB_USERNAME=your_github_username
 ```
 
 ### Step 5: Run the development server
-=======
-### Step 4: Run the development server
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
 
 ```bash
 npm run dev
@@ -137,7 +110,6 @@ The site will be available at [http://localhost:5173](http://localhost:5173)
 
 ---
 
-<<<<<<< HEAD
 ## 🌐 Deployment to Vercel
 
 ### Option 1: Deploy via Vercel CLI
@@ -210,22 +182,6 @@ src/
 - **Dynamic Tags**: Tech stack badges auto-rotate through accent colors
 
 ---
-=======
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
-
-## 🌐 Live Demo
-
-👉 [Visit My Live Portfolio](https://mwakidenis.pages.dev/)
-
----
-
-## 📬 Contact
-
-<<<<<<< HEAD
-Have feedback or opportunities? Let's talk!  
-=======
-Have feedback or opportunities? Let’s talk!
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
 #### [📧 Email:](mwakidenice@gmail.com) 
 
 #### [💬 WhatsApp:](https://wa.me/254798750585)  
@@ -266,8 +222,4 @@ I extend my heartfelt gratitude for any invaluable contribution to this project!
 
 ---
 
-<<<<<<< HEAD
 Last updated: 2026-08-25 04:22 UTC
-=======
-Last updated: 2026-08-25 04:22 UTC
->>>>>>> 650c615b9e811d9733401503e6e894e73740400c
