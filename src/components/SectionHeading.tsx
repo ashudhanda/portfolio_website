@@ -8,6 +8,12 @@ interface SectionHeadingProps extends HTMLAttributes<HTMLDivElement> {
   centered?: boolean;
 }
 
+/**
+ * Standard heading block used at the top of every portfolio section.
+ * Renders a gradient-styled title with an optional centered subtitle;
+ * pass `centered={false}` for left-aligned section headers and merge
+ * extra Tailwind classes via `className` (all other div props spread through).
+ */
 const SectionHeading = ({ 
   title, 
   subtitle, 
