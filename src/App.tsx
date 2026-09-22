@@ -17,6 +17,9 @@ const queryClient = new QueryClient();
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Branded splash screen: shows LoadingScreen for a fixed 5s so the
+  // intro animation always completes before the site renders, regardless
+  // of how fast assets load. Not a real data-loading gate.
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 5000);
     return () => clearTimeout(timer);
