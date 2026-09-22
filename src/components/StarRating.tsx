@@ -12,6 +12,14 @@ interface StarRatingProps {
   onSave?: (rating: number) => Promise<void>;
 }
 
+/**
+ * One-shot feedback widget: a visitor can rate exactly once (further
+ * clicks are disabled and hover feedback is suppressed for the rest of
+ * the session). The rating is also persisted to localStorage under
+ * 'portfolioRating' as a durable record of the visitor's vote; if `onSave`
+ * is provided the value is also posted to the backend and a failed save
+ * re-arms the widget so the visitor can retry.
+ */
 const StarRating = ({
   maxStars = 5,
   initialRating = 0,
