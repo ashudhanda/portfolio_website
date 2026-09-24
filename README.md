@@ -182,7 +182,7 @@ src/
 - **Dynamic Tags**: Tech stack badges auto-rotate through accent colors
 
 ---
-#### [📧 Email:](mwakidenice@gmail.com) 
+#### [📧 Email:](mailto:mwakidenice@gmail.com) 
 
 #### [💬 WhatsApp:](https://wa.me/254798750585)  
 
