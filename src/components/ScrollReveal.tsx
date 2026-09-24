@@ -13,6 +13,14 @@ interface ScrollRevealProps {
   disabled?: boolean; // Add option to disable animations on low-end devices
 }
 
+/**
+ * ScrollReveal wraps its children and plays a one-shot (by default) reveal
+ * animation the first time the element scrolls into view, using
+ * IntersectionObserver so nothing animates until it is actually visible.
+ * It renders a plain div with no animation when `disabled` is true or the
+ * user prefers reduced motion, keeping content accessible either way.
+ */
+
 const ScrollReveal = ({ 
   children, 
   className = '',
