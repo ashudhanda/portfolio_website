@@ -34,6 +34,14 @@ interface UseGithubProjectsReturn {
   refetch: () => void;
 }
 
+/**
+ * Fetches the user's public repos from the GitHub REST API, keeps only the
+ * FEATURED_REPOS whitelist, and transforms each one into the shape the
+ * portfolio project cards expect (title, tags, stars, forks, links...),
+ * finally sorting by star count descending. An optional
+ * VITE_GITHUB_TOKEN raises the unauthenticated API rate limit.
+ */
+
 export const useGithubProjects = (): UseGithubProjectsReturn => {
   const [repos, setRepos] = useState<TransformedProject[]>([]);
   const [loading, setLoading] = useState(true);
