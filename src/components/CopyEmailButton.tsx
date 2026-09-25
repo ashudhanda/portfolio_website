@@ -9,6 +9,15 @@ interface CopyEmailButtonProps {
   email: string;
 }
 
+/**
+ * Icon button that copies the given email address to the clipboard.
+ *
+ * On success it swaps the copy icon for a check mark, shows a toast, and
+ * reverts the icon after 2 seconds; on failure it only shows an error toast.
+ * The surrounding tooltip also reflects the current copied state.
+ *
+ * @param props.email - Email address written to the clipboard on click.
+ */
 const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
   const [copied, setCopied] = useState(false);
   
