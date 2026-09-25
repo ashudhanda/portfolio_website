@@ -11,6 +11,18 @@ interface SkillsCarouselProps {
   }[];
 }
 
+/**
+ * Horizontally auto-scrolling strip of skill cards.
+ *
+ * How it works: a requestAnimationFrame loop advances `scrollLeft` at a
+ * device-dependent pace (faster on mobile) and snaps back to 0 when the end
+ * is reached, creating a seamless infinite loop (the list is padded with a
+ * few duplicated items so the wrap is invisible). Scrolling only runs while
+ * the strip is in view, pauses on hover/touch, and resumes 1.5s after a
+ * touch ends.
+ *
+ * @param props.skillsData - Ordered list of { name, icon } entries to display.
+ */
 const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
