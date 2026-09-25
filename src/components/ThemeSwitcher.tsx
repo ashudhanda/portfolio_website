@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
+/**
+ * Theme toggle button with an animated sun/moon icon swap.
+ *
+ * Behaviour: defaults to dark mode on first visit, restores the stored
+ * preference from localStorage on mount, and keeps the DOM in sync by
+ * adding/removing the `dark` class on <html>. Every toggle persists the
+ * new value and shows a short toast confirming the switch.
+ */
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark"); // Default to dark
   const { toast } = useToast();
