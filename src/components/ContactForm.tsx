@@ -6,8 +6,17 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { Send } from 'lucide-react';
 
+// Formspree endpoint that receives contact submissions (submissions arrive
+// as email to the site owner; no backend of our own is involved).
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mrbpogeb";
 
+/**
+ * Contact form that posts submissions to Formspree via fetch.
+ *
+ * On success it shows a confirmation toast and resets the fields; on failure
+ * it shows an error toast. The submit button is disabled while a request is
+ * in flight to prevent double submissions.
+ */
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
