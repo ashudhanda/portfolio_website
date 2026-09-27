@@ -10,6 +10,11 @@ interface TestimonialCardProps extends HTMLAttributes<HTMLDivElement> {
   avatarSrc?: string;
 }
 
+/**
+ * Testimonial quote card: a large decorative quote mark, the testimonial
+ * text, and an author row with a photo avatar or a colored initial fallback
+ * plus name and role. Extra classes and div props merge/spread through.
+ */
 const TestimonialCard = ({ 
   content, 
   author, 
