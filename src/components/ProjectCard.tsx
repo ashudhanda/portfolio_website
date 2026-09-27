@@ -22,10 +22,7 @@ const ProjectCard = ({
   reversed = false,
 }: ProjectCardProps) => {
   return (
-    <div className={cn(
-      "grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center",
-      reversed && "md:flexRow-reverse"
-    )}>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
       <div className={cn(
         "order-2",
         reversed ? "md:order-1" : "md:order-2"
