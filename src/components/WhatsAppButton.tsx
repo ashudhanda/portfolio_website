@@ -9,6 +9,19 @@ interface WhatsAppButtonProps {
   testimonialCount?: number;
 }
 
+/**
+ * Floating WhatsApp button fixed at the bottom-left of the page.
+ *
+ * Hides while the visitor scrolls down and reappears on scroll up (or near
+ * the top of the page). A small "Chat directly with me on WhatsApp!" bubble
+ * fades in two seconds after mount; both bubble and button open a
+ * pre-filled wa.me chat link in a new tab when clicked.
+ *
+ * @param props.phoneNumber - Phone number prop (currently unused: the wa.me
+ * link is built with a hardcoded number).
+ * @param props.message - Pre-filled greeting message, URL-encoded into the link.
+ * @param props.testimonialCount - Currently unused display count (kept for API stability).
+ */
 const WhatsAppButton = ({ 
   phoneNumber, 
   message = "Hi Mwaki Denis! I love your portfolio and would like to discuss a potential project. Are you available?",
