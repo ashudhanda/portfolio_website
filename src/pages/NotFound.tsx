@@ -1,6 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
+/**
+ * NotFound renders the 404 fallback page for unknown routes.
+ * It logs the attempted pathname to the console so broken or
+ * mistyped internal links can be spotted during debugging.
+ */
 const NotFound = () => {
   const location = useLocation();
 
