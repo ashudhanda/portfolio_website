@@ -82,7 +82,7 @@ git clone https://github.com/mwakidenis/portfolio_website.git
 ### Step 2: Navigate to the project folder
 
 ```bash
-cd portfolio_website-main
+cd portfolio_website
 ```
 
 ### Step 3: Install dependencies
