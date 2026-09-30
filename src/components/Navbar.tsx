@@ -167,7 +167,7 @@ const Navbar = () => {
             size="icon" 
             onClick={toggleMenu}
             className="md:hidden h-9 w-9"
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </Button>
