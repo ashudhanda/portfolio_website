@@ -6,6 +6,18 @@ import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+/**
+ * Fixed top navigation bar with scroll-spy section tracking.
+ *
+ * - Highlights the nav link whose section is currently around the viewport
+ *   midpoint (rechecked passively on scroll, plus once on mount).
+ * - Shrinks and gains a blurred background once the page scrolls past 20px.
+ * - On mobile, a hamburger toggle (with ThemeSwitcher beside it) expands a
+ *   dropdown panel; the panel closes when a link is clicked or the window
+ *   is resized back to desktop width.
+ * - The "Blog" link routes to /blog via react-router; the rest are plain
+ *   in-page anchors.
+ */
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
