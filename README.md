@@ -210,7 +210,6 @@ This portfolio was crafted to reflect my passion for software development, clean
   <tr>
     <td align="center">
         <img src="https://res.cloudinary.com/dqv8dlj2s/image/upload/v1772276752/IMG_20251220_111730_cqlgfo.jpg" width="750" height="250" />
-      </a>
       <h4>mwakidenis</h4>
     </td>
   </tr>
