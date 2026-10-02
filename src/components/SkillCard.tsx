@@ -7,6 +7,12 @@ interface SkillCardProps extends HTMLAttributes<HTMLDivElement> {
   icon: React.ReactNode;
 }
 
+/**
+ * Compact skill card: centered icon above the skill name, with a subtle
+ * lift + glow hover effect. Renders a plain div (not a button or link),
+ * so it is presentational on its own; extra div props (including event
+ * handlers and data attributes) spread through via `...props`.
+ */
 const SkillCard = ({ name, icon, className, ...props }: SkillCardProps) => {
   return (
     <div 
