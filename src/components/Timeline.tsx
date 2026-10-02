@@ -11,6 +11,11 @@ interface TimelineItemProps {
   className?: string;
 }
 
+/**
+ * One entry on a vertical timeline: year badge + title + description inside
+ * a glass card, pinned to the rail by a dot marker. The last item drops its
+ * bottom padding so the rail ends flush with the final entry.
+ */
 export const TimelineItem = ({ 
   year, 
   title, 
@@ -50,6 +55,12 @@ interface TimelineProps {
   className?: string;
 }
 
+/**
+ * Vertical timeline container: optional heading + subtitle above a stack of
+ * <TimelineItem> children connected by the rail. Spacing comes from the
+ * `space-y-4` wrapper and each item's own padding; pass `className` for
+ * extra layout styling.
+ */
 const Timeline = ({ title, subtitle, children, className }: TimelineProps) => {
   return (
     <div className={cn("space-y-4", className)}>
