@@ -46,6 +46,15 @@
 
   <body>
     <div id="root"></div>
+    <!-- Fallback for visitors with JavaScript disabled: without JS the
+         React bundle never mounts, so show a short notice instead of a
+         blank page. -->
+    <noscript>
+      <div style="font-family: system-ui, sans-serif; text-align: center; padding: 4rem 1.5rem; line-height: 1.6;">
+        <h1>This portfolio needs JavaScript to load</h1>
+        <p>Please enable JavaScript in your browser to view this site.</p>
+      </div>
+    </noscript>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
