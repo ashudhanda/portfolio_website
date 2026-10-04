@@ -139,6 +139,14 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
+/**
+ * Shows a toast notification. The new toast is added to the front of the
+ * queue and only the newest TOAST_LIMIT toast(s) stay visible — older ones
+ * are dropped automatically.
+ *
+ * Returns handles for the toast: `id` to identify it, `dismiss()` to close
+ * it programmatically, and `update()` to change its content after showing.
+ */
 function toast({ ...props }: Toast) {
   const id = genId()
 
