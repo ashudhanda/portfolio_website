@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Menu, X, Code, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * Fixed top navigation bar with scroll-spy section tracking.
@@ -22,7 +21,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
