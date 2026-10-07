@@ -20,13 +20,13 @@ interface CopyEmailButtonProps {
  */
 const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
   const [copied, setCopied] = useState(false);
-  
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(email)
       .then(() => {
         setCopied(true);
         toast.success('Email copied to clipboard!');
-        
+
         // Reset the copied state after 2 seconds
         setTimeout(() => {
           setCopied(false);
@@ -36,14 +36,14 @@ const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
         toast.error('Failed to copy email');
       });
   };
-  
+
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={copyToClipboard}
             aria-label="Copy email to clipboard"
             className="ml-2 h-8 w-8"
