@@ -13,12 +13,13 @@ interface StarRatingProps {
 }
 
 /**
- * One-shot feedback widget: a visitor can rate exactly once (further
- * clicks are disabled and hover feedback is suppressed for the rest of
- * the session). The rating is also persisted to localStorage under
- * 'portfolioRating' as a durable record of the visitor's vote; if `onSave`
- * is provided the value is also posted to the backend and a failed save
- * re-arms the widget so the visitor can retry.
+ * One-shot feedback widget: once a visitor rates, further clicks are
+ * disabled and hover feedback is suppressed for that page load (the lock
+ * lives in component state, so reloading the page re-arms the widget).
+ * The rating is also persisted to localStorage under 'portfolioRating'
+ * as a durable record of the visitor's vote; if `onSave` is provided the
+ * value is also posted to the backend and a failed save clears the lock
+ * so the visitor can retry.
  */
 const StarRating = ({
   maxStars = 5,
@@ -34,11 +35,11 @@ const StarRating = ({
 
   const handleRating = async (selectedRating: number) => {
     if (isRated || isSaving) return;
-    
+
     setRating(selectedRating);
     setIsRated(true);
     onChange?.(selectedRating);
-    
+
     if (onSave) {
       try {
         setIsSaving(true);
@@ -66,7 +67,7 @@ const StarRating = ({
         duration: 3000,
       });
     }
-    
+
     // Store rating in local storage
     localStorage.setItem('portfolioRating', selectedRating.toString());
   };
@@ -76,7 +77,7 @@ const StarRating = ({
       {Array.from({ length: maxStars }).map((_, index) => {
         const starValue = index + 1;
         const isActive = starValue <= (hoverRating || rating);
-        
+
         return (
           <button
             key={`star-${index}`}
@@ -94,8 +95,8 @@ const StarRating = ({
             <Star
               className={cn(
                 "transition-colors",
-                isActive 
-                  ? "fill-primary text-primary" 
+                isActive
+                  ? "fill-primary text-primary"
                   : "fill-none text-muted-foreground hover:text-primary",
                 isSaving && "opacity-50"
               )}
