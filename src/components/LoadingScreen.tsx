@@ -36,6 +36,9 @@ function AnimatedTextRotator() {
     }, 1200);
 
     return () => clearInterval(interval);
+    // `messages` is a fresh array on every render, so the dependency is its
+    // stable length — not the array itself — to avoid tearing down and
+    // recreating the rotation interval after every render.
   }, [messages.length]);
 
   return (
