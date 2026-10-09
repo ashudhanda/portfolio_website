@@ -1,9 +1,16 @@
 
 import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
 
+/**
+ * Site footer: brand blurb on the left, icon-only social links on the right,
+ * and a copyright line below. The copyright year updates automatically so it
+ * never goes stale.
+ */
 const Footer = () => {
   const year = new Date().getFullYear();
-  
+
+  // Rendered from a single list so adding/removing a social profile needs
+  // only one line changed here.
   const socialLinks = [
     { name: 'GitHub', icon: <Github size={18} />, url: 'https://github.com/mwakidenis' },
     { name: 'LinkedIn', icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/denis-it-54199939a/' },
