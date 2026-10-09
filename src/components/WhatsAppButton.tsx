@@ -62,7 +62,9 @@ const WhatsAppButton = ({
     <div className="fixed left-6 bottom-6 z-50 flex items-end gap-3">
       {/* Text bubble - now clickable.
           role="button" + tabIndex + key handler make the bubble
-          keyboard-operable (Enter/Space) while mouse behavior stays the same. */}
+          keyboard-operable (Enter/Space) while mouse behavior stays the same.
+          Its accessible name differs from the round button's so screen readers
+          announce two distinct controls. */}
       <div 
         role="button"
         tabIndex={0}
@@ -73,7 +75,7 @@ const WhatsAppButton = ({
             handleClick();
           }
         }}
-        aria-label="Chat on WhatsApp"
+        aria-label="Open a WhatsApp chat"
         className={cn(
           "max-w-[200px] bg-white dark:bg-gray-800 p-3 rounded-xl shadow-md text-sm transition-all duration-300 relative cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700",
           showBubble ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[-20px] pointer-events-none"
