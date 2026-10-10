@@ -31,7 +31,7 @@ const Footer = () => {
             </p>
           </div>
           
-          <div className="flex items-center gap-4" aria-label="Social links">
+          <div className="flex items-center gap-4" role="group" aria-label="Social links">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
