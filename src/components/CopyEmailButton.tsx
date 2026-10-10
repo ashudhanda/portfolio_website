@@ -9,6 +9,9 @@ interface CopyEmailButtonProps {
   email: string;
 }
 
+// How long the "copied" check mark stays before reverting to the copy icon.
+const COPIED_RESET_DELAY_MS = 2000;
+
 /**
  * Icon button that copies the given email address to the clipboard.
  *
@@ -27,10 +30,10 @@ const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
         setCopied(true);
         toast.success('Email copied to clipboard!');
 
-        // Reset the copied state after 2 seconds
+        // Reset the copied state after the reset delay
         setTimeout(() => {
           setCopied(false);
-        }, 2000);
+        }, COPIED_RESET_DELAY_MS);
       })
       .catch(() => {
         toast.error('Failed to copy email');
