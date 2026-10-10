@@ -109,7 +109,7 @@ const ThemeSwitcher = () => {
           className="absolute inset-0 rounded-full"
           initial={{ scale: 0 }}
           animate={{ 
-            scale: theme === "dark" ? [0, 20, 0] : [0, 20, 0],
+            scale: [0, 20, 0],
             backgroundColor: theme === "dark" ? "#8b5cf6" : "#fbbf24"
           }}
           transition={{ duration: 1.5 }}
