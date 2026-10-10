@@ -54,7 +54,7 @@ const WhatsAppButton = ({
 
   const handleClick = () => {
     // Format the WhatsApp URL with phone number and encoded message
-    const whatsappUrl = `https://wa.me/${+254798750585}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${254798750585}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
 
