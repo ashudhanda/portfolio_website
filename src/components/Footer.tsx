@@ -14,7 +14,7 @@ const Footer = () => {
   const socialLinks = [
     { name: 'GitHub', icon: <Github size={18} />, url: 'https://github.com/mwakidenis' },
     { name: 'LinkedIn', icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/denis-it-54199939a/' },
-    { name: 'Twitter', icon: <Twitter size={18} />, url: 'https://x.com/Apro5550' },
+    { name: 'X', icon: <Twitter size={18} />, url: 'https://x.com/Apro5550' },
     { name: 'Email', icon: <Mail size={18} />, url: 'mailto:mwakidenice@gmail.com' },
   ];
 
