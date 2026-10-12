@@ -12,6 +12,13 @@ interface ProjectCardProps {
   reversed?: boolean;
 }
 
+/**
+ * Project card: two-column layout with text on one side and a screenshot on
+ * the other. `reversed` flips the columns on md+ screens so adjacent cards
+ * zig-zag; on mobile the image always renders first (order-1) above the text
+ * regardless of `reversed`. Optional `liveDemoUrl`/`githubUrl` control
+ * whether the demo and source buttons appear.
+ */
 const ProjectCard = ({
   title,
   description,
