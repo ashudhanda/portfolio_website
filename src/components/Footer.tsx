@@ -27,7 +27,7 @@ const Footer = () => {
               <span className="text-gradient">Denis</span>
             </p>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-md">
-              Creating digital experiences that inspire. Passionate about clean code, user-focused design, and impact-driven tech. Built by Mwaki Denis | Software Engineer & Startup Enthusiast 🚀
+              Creating digital experiences that inspire. Passionate about clean code, user-focused design, and impact-driven tech. Built by Mwaki Denis | Software Engineer & Startup Enthusiast <span aria-hidden="true">🚀</span>
             </p>
           </div>
           
@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t mt-8 pt-6 text-center text-sm text-muted-foreground">
-          <p>&copy; {year} Mwaki Denis✨. All rights reserved.</p>
+          <p>&copy; {year} Mwaki Denis<span aria-hidden="true">✨</span>. All rights reserved.</p>
         </div>
       </div>
     </footer>
