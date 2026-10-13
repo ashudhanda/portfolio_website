@@ -116,6 +116,10 @@ export default function LoadingScreen() {
 
   /* ---------------------------------------------
      Floating particles
+
+     Regenerated whenever the viewport size changes so the scatter always
+     matches the current window size (positions also re-randomize on
+     resize, which is fine for a decorative layer).
   ---------------------------------------------- */
   const particles = useMemo(() => {
     if (!mounted) return [];
