@@ -8,8 +8,9 @@ import ThemeSwitcher from "./ThemeSwitcher";
 /**
  * Fixed top navigation bar with scroll-spy section tracking.
  *
- * - Highlights the nav link whose section is currently around the viewport
- *   midpoint (rechecked passively on scroll, plus once on mount).
+ * - Highlights the nav link whose section straddles a fixed line 150px from
+ *   the top of the viewport (rechecked passively on scroll, plus once on
+ *   mount).
  * - Shrinks and gains a blurred background once the page scrolls past 20px.
  * - On mobile, a hamburger toggle (with ThemeSwitcher beside it) expands a
  *   dropdown panel; the panel closes when a link is clicked or the window
