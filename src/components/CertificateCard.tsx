@@ -13,6 +13,15 @@ interface CertificateCardProps extends HTMLAttributes<HTMLDivElement> {
   certificateLink?: string;
 }
 
+/**
+ * Certificate card: optional 16:9 image header with a gradient fade, then a
+ * content block pulled up with -mt-12 so it overlaps the image bottom edge.
+ * Always shows an issuer icon, title, issuer, and date plus a "Verified"
+ * badge; a "View Certificate" button appears only when `certificateLink`
+ * is set, and its click stops propagation so it never bubbles to a
+ * wrapping card-level handler. Extra classes and div props merge/spread
+ * through `className` / `...props`.
+ */
 const CertificateCard = ({
   title,
   issuer,
