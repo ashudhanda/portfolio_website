@@ -57,7 +57,6 @@ export function useIsMobile() {
  * on every window resize. Initializes to `{ width: 0, height: 0 }` until the
  * first measurement runs after mount.
  */
-// Export a hook to get the current viewport dimensions
 export function useViewportSize() {
   const [size, setSize] = React.useState({ width: 0, height: 0 })
 
