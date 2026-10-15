@@ -96,7 +96,7 @@ const Navbar = () => {
           className="font-heading text-lg sm:text-xl font-bold flex items-center gap-2"
           onClick={closeMenu}
         >
-          {/* Improved logo with better color contrast for both light and dark modes */}
+          {/* Logo mark: gradient halo + icon, readable in light and dark modes */}
           <div className="relative flex items-center">
             <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-400 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-shift"></div>
             <div className="relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-background rounded-lg ring-1 ring-gray-400/50 dark:ring-white/50 overflow-hidden">
@@ -173,7 +173,7 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Menu - Improved for better mobile experience */}
+      {/* Mobile dropdown menu panel */}
       <div 
         className={`md:hidden fixed top-[52px] left-0 right-0 bg-background/95 backdrop-blur-lg shadow-md transition-all duration-300 z-50 ${
           isMenuOpen ? "max-h-[80vh] opacity-100 visible" : "max-h-0 opacity-0 invisible"
