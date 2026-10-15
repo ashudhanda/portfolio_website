@@ -60,11 +60,10 @@ const WhatsAppButton = ({
 
   return (
     <div className="fixed left-6 bottom-6 z-50 flex items-end gap-3">
-      {/* Text bubble - now clickable.
-          role="button" + tabIndex + key handler make the bubble
-          keyboard-operable (Enter/Space) while mouse behavior stays the same.
-          Its accessible name differs from the round button's so screen readers
-          announce two distinct controls. */}
+      {/* Text bubble - clickable like the round button (opens the same WhatsApp chat).
+          role="button" + tabIndex + key handler make it keyboard-operable
+          (Enter/Space). Its accessible name differs from the round button's so
+          screen readers announce two distinct controls. */}
       <div 
         role="button"
         tabIndex={0}
@@ -86,8 +85,6 @@ const WhatsAppButton = ({
       </div>
       
       <div className="relative">
-        {/* Badge showing testimonial count has been removed */}
-        
         <button
           onClick={handleClick}
           className={cn(
