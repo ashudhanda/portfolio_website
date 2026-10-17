@@ -18,6 +18,13 @@ import {
 } from '@/components/ui/pagination';
 import { blogPosts } from '@/data/blogData';
 
+/**
+ * Blog index page: renders the static blogPosts array in a 2-col card grid
+ * with client-side pagination (4 posts per page, sliced from the in-memory
+ * data — no network requests). Changing page scrolls back to the top so the
+ * user always lands on the first card of the new page; the pager itself
+ * only renders when there is more than one page.
+ */
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 4;
@@ -31,6 +38,7 @@ const Blog = () => {
   const totalPages = Math.ceil(blogPosts.length / postsPerPage);
   
   const handlePageChange = (pageNumber: number) => {
+    // Reset scroll so each page starts at the top of the post list.
     window.scrollTo(0, 0);
     setCurrentPage(pageNumber);
   };
