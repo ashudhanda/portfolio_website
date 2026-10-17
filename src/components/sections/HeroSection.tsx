@@ -3,6 +3,15 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+/**
+ * Hero (home) section: headline, CTAs and the circular profile portrait.
+ *
+ * The portrait carries a subtle mouse-parallax on desktop (a small fraction
+ * of the cursor offset, eased with a 0.1s transition). The decorative layer
+ * (blobs, rings, particles) is skipped entirely on mobile: useIsMobile
+ * short-circuits the listener and the image renders without a transform,
+ * keeping the hero cheap on small screens.
+ */
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMounted, setIsMounted] = useState(false);
@@ -11,6 +20,8 @@ const HeroSection = () => {
   useEffect(() => {
     setIsMounted(true);
 
+    // No mouse tracking on touch devices: parallax adds nothing there and
+    // the decorative blob/particle layer is skipped below.
     if (isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
