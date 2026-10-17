@@ -10,6 +10,15 @@ import { ChevronLeft, Calendar, Clock, User, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { blogPosts } from '@/data/blogData';
 
+/**
+ * Single blog post page (/blog/:id).
+ *
+ * Looks the post up by URL param in the static blogData array — a 300ms
+ * simulated delay surfaces the skeleton shimmer first so the loading state
+ * is visible in dev. Renders three states: the skeleton while loading, a
+ * not-found page with a back link when the id matches nothing, and the full
+ * article (byline, hero image, body, tags) when the post resolves.
+ */
 const BlogPost = () => {
   const { id } = useParams();
   const [post, setPost] = useState<any>(null);
