@@ -74,7 +74,14 @@ export interface BlogPost {
   tags: string[];
 }
 
-// Accent color for tags
+/**
+ * Accent color token set for tag pills, certificate badges and skill chips.
+ *
+ * ACCENT_COLORS maps each token to light/dark-friendly Tailwind classes
+ * (soft background, readable text, subtle border). Use getAccentColor(index)
+ * to cycle deterministically through the palette so lists of any length get
+ * a stable, evenly distributed set of colors with no manual assignment.
+ */
 export type AccentColor = 
   | 'blue' 
   | 'purple' 
@@ -128,7 +135,11 @@ export const ACCENT_COLORS: Record<AccentColor, { bg: string; text: string; bord
   }
 };
 
-// Helper function to get color by index
+/**
+ * Returns the accent token for a 0-based position, wrapping around the
+ * palette with modulo so any index (even beyond the palette length) stays
+ * valid and lists cycle colors consistently across renders.
+ */
 export const getAccentColor = (index: number): AccentColor => {
   const colors: AccentColor[] = ['blue', 'purple', 'emerald', 'amber', 'crimson', 'cyan', 'pink', 'lime'];
   return colors[index % colors.length];
