@@ -108,6 +108,16 @@ npm run dev
 
 The site will be available at [http://localhost:5173](http://localhost:5173)
 
+## 🧾 Available Scripts
+
+| Script | Command | Description |
+|--------|---------|-------------|
+| `npm run dev` | `vite` | Start the local dev server with hot reload |
+| `npm run build` | `vite build` | Create the optimized production build in `dist/` |
+| `npm run build:dev` | `vite build --mode development` | Build using the development-mode configuration |
+| `npm run preview` | `vite preview` | Preview the production build locally before deploying |
+| `npm run lint` | `eslint .` | Lint the codebase for style and correctness issues |
+
 ---
 
 ## 🌐 Deployment to Vercel
@@ -221,4 +231,4 @@ I extend my heartfelt gratitude for any invaluable contribution to this project!
 
 ---
 
-Last updated: 2026-09-27
+Last updated: 2026-10-18
