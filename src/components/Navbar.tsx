@@ -18,6 +18,27 @@ import ThemeSwitcher from "./ThemeSwitcher";
  * - The "Blog" link routes to /blog via react-router; the rest are plain
  *   in-page anchors.
  */
+interface NavLink {
+  name: string;
+  href: string;
+}
+
+/**
+ * Returns true when the given nav link matches the currently active section.
+ * In-page anchors compare against scroll-spy state; the Blog link is a real
+ * route rather than an anchor, so it compares against the current pathname.
+ */
+const isLinkActive = (link: NavLink, activeSection: string): boolean =>
+  (link.href === "/#home" && activeSection === "home") ||
+  (link.href === "/#about" && activeSection === "about") ||
+  (link.href === "/#career" && activeSection === "career") ||
+  (link.href === "/#skills" && activeSection === "skills") ||
+  (link.href === "/#education" && activeSection === "education") ||
+  (link.href === "/#projects" && activeSection === "projects") ||
+  (link.href === "/blog" && window.location.pathname === "/blog") ||
+  (link.href === "/#testimonials" && activeSection === "testimonials") ||
+  (link.href === "/#contact" && activeSection === "contact");
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -70,7 +91,7 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen]);
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { name: "Home", href: "/#home" },
     { name: "About", href: "/#about" },
     { name: "Career", href: "/#career" },
@@ -115,16 +136,7 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
           <ul className="flex items-center gap-3 lg:gap-6">
             {navLinks.map((link) => {
-              const isActive = 
-                (link.href === "/#home" && activeSection === "home") ||
-                (link.href === "/#about" && activeSection === "about") ||
-                (link.href === "/#career" && activeSection === "career") ||
-                (link.href === "/#skills" && activeSection === "skills") ||
-                (link.href === "/#education" && activeSection === "education") ||
-                (link.href === "/#projects" && activeSection === "projects") ||
-                (link.href === "/blog" && window.location.pathname === "/blog") ||
-                (link.href === "/#testimonials" && activeSection === "testimonials") ||
-                (link.href === "/#contact" && activeSection === "contact");
+              const isActive = isLinkActive(link, activeSection);
                 
               return (
                 <li key={link.name}>
@@ -182,16 +194,7 @@ const Navbar = () => {
         <nav className="container py-4 px-4">
           <ul className="flex flex-col gap-1">
             {navLinks.map((link) => {
-              const isActive = 
-                (link.href === "/#home" && activeSection === "home") ||
-                (link.href === "/#about" && activeSection === "about") ||
-                (link.href === "/#career" && activeSection === "career") ||
-                (link.href === "/#skills" && activeSection === "skills") ||
-                (link.href === "/#education" && activeSection === "education") ||
-                (link.href === "/#projects" && activeSection === "projects") ||
-                (link.href === "/blog" && window.location.pathname === "/blog") ||
-                (link.href === "/#testimonials" && activeSection === "testimonials") ||
-                (link.href === "/#contact" && activeSection === "contact");
+              const isActive = isLinkActive(link, activeSection);
               
               return (
                 <li key={link.name}>
