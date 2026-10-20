@@ -1,6 +1,14 @@
 import { Project } from '@/types';
 
-// Featured project - Mpesa WiFi Billing System (always pinned at top)
+/**
+ * Project data sources for the portfolio's Projects section.
+ *
+ * - FEATURED_PROJECT: pinned at the top of the section, always shown.
+ * - STATIC_PROJECTS: hand-written entries kept locally (currently empty —
+ *   add projects here that should not be pulled from GitHub).
+ * - GITHUB_WHITELIST: repo names fetched live from the GitHub REST API by
+ *   the `useGithubProjects` hook and merged with the entries above.
+ */
 export const FEATURED_PROJECT: Project = {
   id: '1',
   title: 'Mpesa-Based Wi-Fi Hotspot Billing System 🧾',
