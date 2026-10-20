@@ -1,4 +1,13 @@
 
+/**
+ * Blog post data for the portfolio's Blog pages.
+ *
+ * Entries are rendered newest-first (array order = display order) on the
+ * Blog listing page and in the Blog Highlights section. The `image` paths
+ * resolve from the `/public` folder. `content` holds the full article body
+ * — posts still showing the placeholder text are stubs until the real
+ * articles are written.
+ */
 export const blogPosts = [
   {
     id: 1,
