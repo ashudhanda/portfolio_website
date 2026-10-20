@@ -1,5 +1,12 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Tailwind configuration (shadcn/ui preset).
+ *
+ * Color tokens below are bound to the CSS custom properties declared in
+ * `src/index.css` (`:root` for light mode, `.dark` for dark mode) — changing
+ * the palette there updates every utility that references these tokens.
+ */
 export default {
   darkMode: ["class"],
   content: [
