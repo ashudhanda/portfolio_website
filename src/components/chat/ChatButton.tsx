@@ -11,6 +11,11 @@ interface ChatButtonProps {
   unreadCount?: number;
 }
 
+/**
+ * Floating chat launcher: shows a message icon (or X when the chat is
+ * open) with an unread-count badge when unreadCount > 0. Tooltip and
+ * aria-label swap between "open"/"close" wording with the chat state.
+ */
 const ChatButton = ({ onClick, isOpen, unreadCount = 0 }: ChatButtonProps) => {
   return (
     <TooltipProvider>
