@@ -26,7 +26,8 @@ const ContactSection = () => {
               
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  {/* Decorative icon: the "Email" label next to it already conveys the meaning */}
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary" aria-hidden="true">
                     <Mail size={18} />
                   </div>
                   <div className="flex items-center">
@@ -45,7 +46,8 @@ const ContactSection = () => {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  {/* Decorative icon: the "Location" label next to it already conveys the meaning */}
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary" aria-hidden="true">
                     <Globe size={18} />
                   </div>
                   <div>
