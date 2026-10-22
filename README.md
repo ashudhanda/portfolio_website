@@ -76,7 +76,7 @@ Follow these steps to run the project locally:
 ### Step 1: Clone the repository
 
 ```bash
-git clone https://github.com/mwakidenis/portfolio_website.git
+git clone https://github.com/ashudhanda/portfolio_website.git
 ```
 
 ### Step 2: Navigate to the project folder
@@ -174,8 +174,10 @@ src/
 │   ├── ui/               # shadcn/ui components
 │   ├── chat/             # Chat functionality
 │   └── *.tsx             # Reusable components
-├── data/                 # Static data (projects, certificates)
+├── data/                 # Static data (project list, blog posts)
 ├── hooks/                # Custom React hooks
+│   ├── use-mobile.tsx
+│   ├── use-toast.ts
 │   └── useGithubProjects.ts
 ├── lib/                  # Utility functions
 ├── pages/                # Page components
@@ -231,4 +233,4 @@ I extend my heartfelt gratitude for any invaluable contribution to this project!
 
 ---
 
-Last updated: 2026-10-20
+Last updated: 2026-10-22
