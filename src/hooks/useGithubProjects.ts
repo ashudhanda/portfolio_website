@@ -88,6 +88,7 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
       // Transform and sort repos
       const transformedRepos: TransformedProject[] = filteredRepos.map((repo) => ({
         id: repo.id.toString(),
+        // Title-case the slug for display: "my-portfolio" -> "My Portfolio"
         title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
         description: repo.description || 'No description available',
         imageSrc: '/placeholder.svg',
