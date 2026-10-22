@@ -17,8 +17,7 @@ interface WhatsAppButtonProps {
  * fades in two seconds after mount; both bubble and button open a
  * pre-filled wa.me chat link in a new tab when clicked.
  *
- * @param props.phoneNumber - Phone number prop (currently unused: the wa.me
- * link is built with a hardcoded number).
+ * @param props.phoneNumber - Phone number used to build the wa.me link.
  * @param props.message - Pre-filled greeting message, URL-encoded into the link.
  * @param props.testimonialCount - Currently unused display count (kept for API stability).
  */
@@ -53,8 +52,8 @@ const WhatsAppButton = ({
   }, [lastScrollY]);
 
   const handleClick = () => {
-    // Format the WhatsApp URL with phone number and encoded message
-    const whatsappUrl = `https://wa.me/${254798750585}?text=${encodeURIComponent(message)}`;
+    // Format the WhatsApp URL with the phoneNumber prop and encoded message
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
 
