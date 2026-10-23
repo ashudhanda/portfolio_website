@@ -73,7 +73,11 @@ const StarRating = ({
   };
 
   return (
-    <div className={cn("flex items-center justify-center gap-1", className)}>
+    <div
+      role="radiogroup"
+      aria-label="Rate this portfolio"
+      className={cn("flex items-center justify-center gap-1", className)}
+    >
       {Array.from({ length: maxStars }).map((_, index) => {
         const starValue = index + 1;
         const isActive = starValue <= (hoverRating || rating);
@@ -90,6 +94,8 @@ const StarRating = ({
             onMouseLeave={() => !isRated && !isSaving && setHoverRating(0)}
             onClick={() => handleRating(starValue)}
             disabled={isRated || isSaving}
+            role="radio"
+            aria-checked={starValue === rating}
             aria-label={`Rate ${starValue} star${starValue !== 1 ? 's' : ''}`}
           >
             <Star
