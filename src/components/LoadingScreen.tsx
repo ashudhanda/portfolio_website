@@ -104,6 +104,9 @@ export default function LoadingScreen() {
 
     window.addEventListener('resize', handleResize);
 
+    // Splash duration matches the progress bar's 5s animation above so the
+    // overlay lifts exactly as the bar fills (see also the matching timer in
+    // App.tsx that unmounts this component).
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 5000);
