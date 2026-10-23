@@ -2,15 +2,24 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 interface ScrollRevealProps {
+  /** Content to wrap and animate on scroll. */
   children: ReactNode;
+  /** Extra classes appended to the wrapper div. */
   className?: string;
+  /** IntersectionObserver visibility threshold before revealing (default 0.1). */
   threshold?: number;
+  /** Delay in ms before the reveal starts once visible (default 0). */
   delay?: number;
+  /** Direction the element slides in from (default 'up'). */
   direction?: 'up' | 'down' | 'left' | 'right';
+  /** CSS transition duration in ms (default 800). */
   duration?: number;
+  /** Reveal only the first time it enters the viewport (default true). */
   once?: boolean;
+  /** IntersectionObserver root margin (default '0px 0px -100px 0px'). */
   rootMargin?: string;
-  disabled?: boolean; // Add option to disable animations on low-end devices
+  /** Skip the animation entirely (e.g. on low-end devices); renders a plain div. */
+  disabled?: boolean;
 }
 
 /**
