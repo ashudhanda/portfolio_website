@@ -51,7 +51,7 @@ const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
             aria-label="Copy email to clipboard"
             className="ml-2 h-8 w-8"
           >
-            {copied ? <Check size={16} /> : <Copy size={16} />}
+            {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
           </Button>
         </TooltipTrigger>
         <TooltipContent>
