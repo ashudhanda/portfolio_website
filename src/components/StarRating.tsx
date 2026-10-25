@@ -99,6 +99,7 @@ const StarRating = ({
             aria-label={`Rate ${starValue} star${starValue !== 1 ? 's' : ''}`}
           >
             <Star
+              aria-hidden="true"
               className={cn(
                 "transition-colors",
                 isActive
