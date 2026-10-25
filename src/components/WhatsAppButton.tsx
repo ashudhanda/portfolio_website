@@ -93,8 +93,8 @@ const WhatsAppButton = ({
           )}
           aria-label="Chat on WhatsApp"
         >
-          <MessageCircle size={24} className="fill-white" />
-          <span className="absolute top-0 right-0 flex h-3 w-3">
+          <MessageCircle size={24} className="fill-white" aria-hidden="true" />
+          <span className="absolute top-0 right-0 flex h-3 w-3" aria-hidden="true">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
           </span>
