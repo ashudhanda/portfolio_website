@@ -32,7 +32,7 @@ const TestimonialCard = ({
       {...props}
     >
       <div className="mb-4 text-primary">
-        <Quote className="h-8 w-8 opacity-70" />
+        <Quote className="h-8 w-8 opacity-70" aria-hidden="true" />
       </div>
       
       <p className="flex-1 text-foreground/90 mb-6 text-lg">{content}</p>
