@@ -16,6 +16,19 @@ interface SkillsNetworkProps {
   skills: SkillProps[];
 }
 
+/**
+ * Interactive scatter-network view of skills.
+ *
+ * Layout: each skill gets a pseudo-random position in a 0-100 x/y plane —
+ * its quadrant comes from `index % 4` and its radius from 0.2 to 0.7 of the
+ * half-plane, so skills spread around the centre instead of clustering.
+ * The hidden X/Y axes only position the bubbles; bubble size comes from
+ * the Z value. The Shuffle button re-randomises all positions, and
+ * clicking a bubble (or its overlaid label) sets `activeSkill`, which
+ * highlights that skill's label in the primary colour.
+ *
+ * @param props.skills - Ordered list of { name, icon } entries to display.
+ */
 const SkillsNetwork = ({ skills }: SkillsNetworkProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 500 });
