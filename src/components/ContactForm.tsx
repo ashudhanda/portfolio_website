@@ -79,6 +79,7 @@ const ContactForm = () => {
           <Input
             id="name"
             name="name"
+            autoComplete="name"
             value={formData.name}
             onChange={handleChange}
             required
@@ -94,6 +95,7 @@ const ContactForm = () => {
             id="email"
             name="email"
             type="email"
+            autoComplete="email"
             value={formData.email}
             onChange={handleChange}
             required
