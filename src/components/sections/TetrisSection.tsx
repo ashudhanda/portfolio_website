@@ -1,3 +1,8 @@
+// TetrisSection: a self-contained canvas Tetris game.
+// Game holds the board, score and line-clear rules; Controller owns the
+// drop timer and keyboard input; View draws the board and side panel.
+// The component creates one Game/Controller/View set on mount and maps
+// the canvas area to a fixed 480x640 board (20 rows x 10 columns).
 import { useEffect, useRef, useState } from 'react';
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
