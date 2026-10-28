@@ -10,6 +10,13 @@ export interface ChatMessageProps {
   status?: "sending" | "sent" | "delivered" | "read" | "error";
 }
 
+/**
+ * One chat bubble. User messages align right with a "You" avatar; admin
+ * (bot) messages align left with the bot avatar. The timestamp renders
+ * as a 12-hour clock (h:mm a). Of the status values, only "error" is
+ * surfaced visually ("Failed to send" under user messages); the other
+ * statuses are accepted but render no indicator.
+ */
 const ChatMessage = ({ content, timestamp, sender, status = "sent" }: ChatMessageProps) => {
   const isUser = sender === "user";
 
