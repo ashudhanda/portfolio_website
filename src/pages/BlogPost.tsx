@@ -95,17 +95,17 @@ const BlogPost = () => {
             
             <div className="flex flex-wrap gap-4 items-center text-sm text-muted-foreground mb-8">
               <div className="flex items-center gap-1">
-                <Calendar size={14} />
+                <Calendar size={14} aria-hidden="true" />
                 <span>{post.date}</span>
               </div>
               
               <div className="flex items-center gap-1">
-                <Clock size={14} />
+                <Clock size={14} aria-hidden="true" />
                 <span>{post.readTime}</span>
               </div>
               
               <div className="flex items-center gap-1">
-                <User size={14} />
+                <User size={14} aria-hidden="true" />
                 <span>{post.author}</span>
               </div>
             </div>
