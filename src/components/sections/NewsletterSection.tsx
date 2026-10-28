@@ -54,7 +54,7 @@ const NewsletterSection = () => {
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center mb-6">
               <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Mail className="h-6 w-6 text-primary" />
+                <Mail className="h-6 w-6 text-primary" aria-hidden="true" />
               </div>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Stay Updated</h2>
@@ -72,7 +72,8 @@ const NewsletterSection = () => {
                       <FormItem>
                         <FormControl>
                           <Input 
-                            placeholder="Your name" 
+                            placeholder="Your name"
+                            aria-label="Your name" 
                             {...field} 
                             className="h-12"
                           />
@@ -89,7 +90,8 @@ const NewsletterSection = () => {
                       <FormItem>
                         <FormControl>
                           <Input 
-                            placeholder="Your email address" 
+                            placeholder="Your email address"
+                            aria-label="Your email address" 
                             type="email" 
                             {...field} 
                             className="h-12"
