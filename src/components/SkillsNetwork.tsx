@@ -102,7 +102,7 @@ const SkillsNetwork = ({ skills }: SkillsNetworkProps) => {
           onClick={generateSkillsPositions}
           className="text-muted-foreground hover:text-foreground"
         >
-          <Shuffle className="h-4 w-4 mr-2" />
+          <Shuffle className="h-4 w-4 mr-2" aria-hidden="true" />
           Shuffle
         </Button>
       </div>
