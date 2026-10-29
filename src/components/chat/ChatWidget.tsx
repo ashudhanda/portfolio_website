@@ -369,9 +369,10 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
                   disabled={isSending}
                   className="flex-1"
                 />
-                <Button 
-                  type="submit" 
-                  size="icon" 
+                <Button
+                  type="submit"
+                  size="icon"
+                  aria-label="Send message"
                   disabled={isSending || !newMessage.trim()}
                 >
                   <Send className="h-5 w-5" />
