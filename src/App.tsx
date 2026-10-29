@@ -12,6 +12,8 @@ import NotFound from "./pages/NotFound";
 import { ChatProvider } from "./components/chat/ChatProvider";
 import LoadingScreen from "./components/LoadingScreen";
 
+// Module-level client: created once for the app lifetime, not inside App,
+// so re-renders never discard the cache and refetch every query.
 const queryClient = new QueryClient();
 
 const App = () => {
