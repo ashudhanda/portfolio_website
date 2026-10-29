@@ -351,7 +351,7 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
                     className="justify-start hover:bg-primary/10 transition-all"
                   >
                     {option.text} 
-                    {!option.text.includes("Go Back") && <ArrowRight className="ml-auto" />}
+                    {!option.text.includes("Go Back") && <ArrowRight className="ml-auto" aria-hidden="true" />}
                   </Button>
                 ))}
               </div>
