@@ -29,7 +29,7 @@ const AboutSection = () => {
           
           <ScrollReveal direction="right">
             <div className="space-y-4">
-              <h3 className="text-xl sm:text-2xl font-bold">My Journey <span className="ml-1">🧭</span></h3>
+              <h3 className="text-xl sm:text-2xl font-bold">My Journey <span className="ml-1" aria-hidden="true">🧭</span></h3>
               <p className="text-sm sm:text-base text-muted-foreground">
                 I'm a versatile UI/UX designer and software developer with a passion for creating digital experiences that are both beautiful and functional. With a background in computer science and years of experience in the industry, I've developed a holistic approach to product development.
               </p>
@@ -37,17 +37,17 @@ const AboutSection = () => {
                 My expertise spans the entire product lifecycle, from user research and wireframing to front-end and back-end development. I believe in user-centered design principles and writing clean, maintainable code. <span className="text-primary">{"</>"}</span>
               </p>
               <p className="text-muted-foreground">
-                When I'm not coding or designing, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers. 🤓
+                When I'm not coding or designing, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers. <span aria-hidden="true">🤓</span>
               </p>
               
               <div className="pt-4">
-  <Button className="gap-2 bg-green-500 hover:bg-green-800 text-white" asChild>
-    <a href="/cv.pdf" download>
-      <Download className="h-4 w-4" />
-      Download CV
-    </a>
-  </Button>
-</div>
+                <Button className="gap-2 bg-green-500 hover:bg-green-800 text-white" asChild>
+                  <a href="/cv.pdf" download>
+                    <Download className="h-4 w-4" aria-hidden="true" />
+                    Download CV
+                  </a>
+                </Button>
+              </div>
 
             </div>
           </ScrollReveal>
