@@ -84,8 +84,8 @@ const EducationSection = () => {
         <div className="mb-16">
           <ScrollReveal>
             <h3 className="text-2xl font-bold mb-6 flex items-center">
-              <GraduationCap className="mr-2 text-primary" />
-              Education🧾
+              <GraduationCap className="mr-2 text-primary" aria-hidden="true" />
+              Education<span aria-hidden="true">🧾</span>
             </h3>
           </ScrollReveal>
           
@@ -94,7 +94,7 @@ const EducationSection = () => {
               <div className="glass p-6 rounded-xl hover-lift">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                   <div>
-                    <h4 className="text-xl font-bold">Bachelor of Science in Computer Science💻</h4>
+                    <h4 className="text-xl font-bold">Bachelor of Science in Computer Science<span aria-hidden="true">💻</span></h4>
                     <p className="text-lg text-primary">Meru University of Science and Technology</p>
                     <p className="mt-2 text-muted-foreground">Currently pursuing a Bachelor's degree in Computer Science. As a third-year student, I'm building a strong foundation in algorithms, data structures, software engineering, and computer networks.</p>
                   </div>
@@ -110,8 +110,8 @@ const EducationSection = () => {
         <div>
           <ScrollReveal>
             <h3 className="text-2xl font-bold mb-6 flex items-center">
-              <Award className="mr-2 text-primary" />
-              Certifications🧾
+              <Award className="mr-2 text-primary" aria-hidden="true" />
+              Certifications<span aria-hidden="true">🧾</span>
             </h3>
           </ScrollReveal>
           
