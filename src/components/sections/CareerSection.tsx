@@ -2,7 +2,7 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
 import Timeline, { TimelineItem } from "@/components/Timeline";
-import { Briefcase, Code, GraduationCap, Layout } from "lucide-react";
+import { Code, GraduationCap, Layout } from "lucide-react";
 
 const CareerSection = () => {
   return (
@@ -37,8 +37,6 @@ const CareerSection = () => {
               description="Self-taught UI/UX design principles and practices. Created mockups and prototypes for personal projects and collaborative work. Learning design tools like Figma and Adobe XD."
               icon={<Layout size={18} />}
             />
-            
-           
           </Timeline>
         </ScrollReveal>
       </div>
