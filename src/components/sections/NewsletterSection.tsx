@@ -73,7 +73,8 @@ const NewsletterSection = () => {
                         <FormControl>
                           <Input 
                             placeholder="Your name"
-                            aria-label="Your name" 
+                            aria-label="Your name"
+                            autoComplete="name"
                             {...field} 
                             className="h-12"
                           />
@@ -91,7 +92,8 @@ const NewsletterSection = () => {
                         <FormControl>
                           <Input 
                             placeholder="Your email address"
-                            aria-label="Your email address" 
+                            aria-label="Your email address"
+                            autoComplete="email"
                             type="email" 
                             {...field} 
                             className="h-12"
