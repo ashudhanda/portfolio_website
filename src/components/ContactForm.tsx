@@ -140,7 +140,7 @@ const ContactForm = () => {
         ) : (
           <>
             Send Message
-            <Send className="ml-2 h-4 w-4" />
+            <Send className="ml-2 h-4 w-4" aria-hidden="true" />
           </>
         )}
       </Button>
