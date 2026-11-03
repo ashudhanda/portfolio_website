@@ -173,6 +173,8 @@ const Navbar = () => {
             onClick={toggleMenu}
             className="md:hidden h-9 w-9"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </Button>
@@ -180,7 +182,8 @@ const Navbar = () => {
       </div>
       
       {/* Mobile dropdown menu panel */}
-      <div 
+      <div
+        id="mobile-nav"
         className={`md:hidden fixed top-[52px] left-0 right-0 bg-background/95 backdrop-blur-lg shadow-md transition-all duration-300 z-50 ${
           isMenuOpen ? "max-h-[80vh] opacity-100 visible" : "max-h-0 opacity-0 invisible"
         }`}
