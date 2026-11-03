@@ -29,15 +29,9 @@ interface NavLink {
  * route rather than an anchor, so it compares against the current pathname.
  */
 const isLinkActive = (link: NavLink, activeSection: string): boolean =>
-  (link.href === "/#home" && activeSection === "home") ||
-  (link.href === "/#about" && activeSection === "about") ||
-  (link.href === "/#career" && activeSection === "career") ||
-  (link.href === "/#skills" && activeSection === "skills") ||
-  (link.href === "/#education" && activeSection === "education") ||
-  (link.href === "/#projects" && activeSection === "projects") ||
-  (link.href === "/blog" && window.location.pathname === "/blog") ||
-  (link.href === "/#testimonials" && activeSection === "testimonials") ||
-  (link.href === "/#contact" && activeSection === "contact");
+  link.href === "/blog"
+    ? window.location.pathname === "/blog"
+    : link.href.replace("/#", "") === activeSection;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
