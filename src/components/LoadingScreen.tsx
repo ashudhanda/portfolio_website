@@ -4,42 +4,45 @@ import { useEffect, useState, useMemo } from 'react';
 /* ---------------------------------------------
    Animated rotating messages (Software Engineer)
 ---------------------------------------------- */
+// Module-level so the rotator does not rebuild the list on every render
+// (previously it was a fresh array inside the component, and the interval
+// effect depended on its length to avoid recreating the timer each render).
+const MESSAGES = [
+  {
+    main: "Building Scalable",
+    sub: "Software Solutions",
+    tagline: "Clean Code • Performance • Reliability"
+  },
+  {
+    main: "Computer Science",
+    sub: "Meets Real-World Impact",
+    tagline: "Algorithms • Data Structures • Systems"
+  },
+  {
+    main: "Full-Stack Developer",
+    sub: "From Idea to Production",
+    tagline: "React • Node.js • APIs • Databases"
+  },
+  {
+    main: "Engineering",
+    sub: "Elegant Digital Experiences",
+    tagline: "UI/UX • Cloud • Security • Optimization"
+  }
+];
+
 function AnimatedTextRotator() {
-  const messages = [
-    {
-      main: "Building Scalable",
-      sub: "Software Solutions",
-      tagline: "Clean Code • Performance • Reliability"
-    },
-    {
-      main: "Computer Science",
-      sub: "Meets Real-World Impact",
-      tagline: "Algorithms • Data Structures • Systems"
-    },
-    {
-      main: "Full-Stack Developer",
-      sub: "From Idea to Production",
-      tagline: "React • Node.js • APIs • Databases"
-    },
-    {
-      main: "Engineering",
-      sub: "Elegant Digital Experiences",
-      tagline: "UI/UX • Cloud • Security • Optimization"
-    }
-  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % messages.length);
+      setCurrentIndex((prev) => (prev + 1) % MESSAGES.length);
     }, 1200);
 
     return () => clearInterval(interval);
-    // `messages` is a fresh array on every render, so the dependency is its
-    // stable length — not the array itself — to avoid tearing down and
-    // recreating the rotation interval after every render.
-  }, [messages.length]);
+    // MESSAGES is a module-level constant, so its length is stable and the
+    // rotation interval is created exactly once on mount.
+  }, [MESSAGES.length]);
 
   return (
     <div className="relative">
@@ -58,7 +61,7 @@ function AnimatedTextRotator() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
           >
-            {messages[currentIndex].main}
+            {MESSAGES[currentIndex].main}
           </motion.p>
 
           <motion.p
@@ -67,7 +70,7 @@ function AnimatedTextRotator() {
             transition={{ delay: 0.2 }}
             className="text-3xl md:text-5xl lg:text-6xl font-bold text-gradient mb-2"
           >
-            {messages[currentIndex].sub}
+            {MESSAGES[currentIndex].sub}
           </motion.p>
 
           <motion.p
@@ -76,7 +79,7 @@ function AnimatedTextRotator() {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-gray-300 mt-4"
           >
-            {messages[currentIndex].tagline}
+            {MESSAGES[currentIndex].tagline}
           </motion.p>
         </motion.div>
       </AnimatePresence>
