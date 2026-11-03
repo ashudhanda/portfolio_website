@@ -201,6 +201,7 @@ export default function LoadingScreen() {
           devIcons.map((icon) => (
             <motion.div
               key={icon.id}
+              aria-hidden="true"
               className="absolute text-4xl opacity-20"
               initial={{ x: icon.x, y: dimensions.height + 50 }}
               animate={{ y: -100, rotate: 360, opacity: [0, 0.3, 0] }}
