@@ -92,7 +92,9 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
         title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
         description: repo.description || 'No description available',
         imageSrc: '/placeholder.svg',
-        tags: repo.topics?.slice(0, 6) || [repo.language || 'Code'].filter(Boolean),
+        // An empty topics array is truthy, so fall back on length, not ||:
+        // otherwise a repo with no topics gets zero tags instead of its language.
+        tags: repo.topics?.length ? repo.topics.slice(0, 6) : [repo.language || 'Code'].filter(Boolean),
         liveDemoUrl: repo.homepage || undefined,
         githubUrl: repo.html_url,
         year: new Date(repo.created_at).getFullYear().toString(),
