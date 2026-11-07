@@ -44,6 +44,9 @@ const ScrollReveal = ({
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
+  // Timer id for the delayed reveal; kept so the timeout can be cleared if
+  // the component unmounts (or the effect re-runs) before the delay fires.
+  const revealTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
   // Check for reduced motion preference
   useEffect(() => {
@@ -73,8 +76,10 @@ const ScrollReveal = ({
       ([entry]) => {
         // Only trigger animation when element enters viewport
         if (entry.isIntersecting && !isVisible) {
-          // Only set once to avoid unnecessary rerenders
-          setTimeout(() => {
+          // Only set once to avoid unnecessary rerenders. Keep the timer id
+          // so unmounting before the delay fires never calls setState on an
+          // unmounted component.
+          revealTimeoutRef.current = setTimeout(() => {
             setIsVisible(true);
           }, delay);
         } else if (!entry.isIntersecting && !once && isVisible) {
@@ -91,6 +96,10 @@ const ScrollReveal = ({
     observer.observe(currentRef);
     
     return () => {
+      if (revealTimeoutRef.current) {
+        clearTimeout(revealTimeoutRef.current);
+        revealTimeoutRef.current = null;
+      }
       if (currentRef) {
         observer.unobserve(currentRef);
       }
