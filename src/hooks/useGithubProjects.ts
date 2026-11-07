@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { GithubRepo } from '@/types';
 
 // Whitelist of repos to display
@@ -46,8 +46,16 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
   const [repos, setRepos] = useState<TransformedProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  // Controller for the in-flight request, so unmounting (or a refetch)
+  // aborts it instead of letting it call setState after it no longer matters.
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const fetchRepos = useCallback(async () => {
+    // Abort any previous in-flight request before starting a new one.
+    abortControllerRef.current?.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     setLoading(true);
     setError(null);
 
@@ -65,7 +73,7 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
 
       const response = await fetch(
         `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`,
-        { headers }
+        { headers, signal: controller.signal }
       );
 
       if (!response.ok) {
@@ -109,14 +117,25 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
 
       setRepos(transformedRepos);
     } catch (err) {
+      // An aborted fetch is intentional (unmount or refetch), not an error.
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        return;
+      }
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
     } finally {
-      setLoading(false);
+      // Only clear loading if this request is still the current one; an
+      // aborted-then-refetched request must not switch loading off early.
+      if (abortControllerRef.current === controller) {
+        setLoading(false);
+      }
     }
   }, []);
 
   useEffect(() => {
     fetchRepos();
+    return () => {
+      abortControllerRef.current?.abort();
+    };
   }, [fetchRepos]);
 
   return {
