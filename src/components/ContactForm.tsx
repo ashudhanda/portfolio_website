@@ -33,12 +33,29 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // HTML `required` still accepts whitespace-only input, so trim first
+    // and reject the submission before any network request is made.
+    const trimmed = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      subject: formData.subject.trim(),
+      message: formData.message.trim(),
+    };
+    if (!trimmed.name || !trimmed.email || !trimmed.subject || !trimmed.message) {
+      toast.error('Please fill in all fields', {
+        description: 'Fields cannot contain only spaces.',
+      });
+      return;
+    }
+    setFormData(trimmed);
+
     setIsSubmitting(true);
     
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        body: JSON.stringify(formData),
+        body: JSON.stringify(trimmed),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
