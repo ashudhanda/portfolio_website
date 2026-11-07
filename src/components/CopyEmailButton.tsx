@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -23,6 +23,17 @@ const COPIED_RESET_DELAY_MS = 2000;
  */
 const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
   const [copied, setCopied] = useState(false);
+  // Timer id for reverting the copied icon; cleared on unmount so a late
+  // timeout never calls setState after the button is gone.
+  const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimeoutRef.current) {
+        clearTimeout(resetTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(email)
@@ -30,8 +41,13 @@ const CopyEmailButton = ({ email }: CopyEmailButtonProps) => {
         setCopied(true);
         toast.success('Email copied to clipboard!');
 
-        // Reset the copied state after the reset delay
-        setTimeout(() => {
+        // Reset the copied state after the reset delay. Clear any pending
+        // reset first so rapid re-clicks restart the delay instead of
+        // stacking timeouts.
+        if (resetTimeoutRef.current) {
+          clearTimeout(resetTimeoutRef.current);
+        }
+        resetTimeoutRef.current = setTimeout(() => {
           setCopied(false);
         }, COPIED_RESET_DELAY_MS);
       })
