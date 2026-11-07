@@ -68,8 +68,14 @@ const StarRating = ({
       });
     }
 
-    // Store rating in local storage
-    localStorage.setItem('portfolioRating', selectedRating.toString());
+    // Store rating in local storage. Guarded: setItem throws in private
+    // browsing mode and when storage is full, and a failed write must not
+    // break the rating flow that already succeeded.
+    try {
+      localStorage.setItem('portfolioRating', selectedRating.toString());
+    } catch (error) {
+      console.error('Could not persist rating to localStorage:', error);
+    }
   };
 
   return (
