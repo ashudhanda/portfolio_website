@@ -1,7 +1,7 @@
 
 import { MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface WhatsAppButtonProps {
   phoneNumber: string;
@@ -27,29 +27,32 @@ const WhatsAppButton = ({
   testimonialCount = 25
 }: WhatsAppButtonProps) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // Ref, not state: the last scroll position is only read inside the scroll
+  // handler, so keeping it in state re-subscribed the scroll listener (and
+  // re-created the bubble timer) on every scroll event.
+  const lastScrollYRef = useRef(0);
   const [showBubble, setShowBubble] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       // Hide the button when scrolling down, show when scrolling up
       const currentScrollY = window.scrollY;
-      setIsVisible(currentScrollY <= 300 || currentScrollY < lastScrollY);
-      setLastScrollY(currentScrollY);
+      setIsVisible(currentScrollY <= 300 || currentScrollY < lastScrollYRef.current);
+      lastScrollYRef.current = currentScrollY;
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
+
     // Show the bubble after 2 seconds
     const bubbleTimer = setTimeout(() => {
       setShowBubble(true);
     }, 2000);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       clearTimeout(bubbleTimer);
     };
-  }, [lastScrollY]);
+  }, []);
 
   const handleClick = () => {
     // Format the WhatsApp URL with the phoneNumber prop and encoded message
