@@ -13,6 +13,33 @@ const createUniqueId = () => {
   return `rating_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 };
 
+// localStorage throws (SecurityError) when storage is disabled or in some
+// private-browsing modes; a failed read/write must never crash the section,
+// so storage access goes through these best-effort wrappers.
+function safeGetItem(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeSetItem(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Persistence is best-effort; the rating flow already succeeded.
+  }
+}
+
+// A hand-edited or corrupt stored value must not render as "NaN stars":
+// only a finite integer in the 1-5 star range counts as a saved rating.
+function parseStoredRating(raw: string | null): number | null {
+  if (raw === null) return null;
+  const parsed = parseInt(raw, 10);
+  return Number.isFinite(parsed) && parsed >= 1 && parsed <= 5 ? parsed : null;
+}
+
 const RatingSection = () => {
   const [hasRated, setHasRated] = useState(false);
   const [savedRating, setSavedRating] = useState(0);
@@ -22,24 +49,24 @@ const RatingSection = () => {
 
   useEffect(() => {
     // Check if user has already rated
-    const rating = localStorage.getItem('portfolioRating');
-    if (rating) {
+    const saved = parseStoredRating(safeGetItem('portfolioRating'));
+    if (saved !== null) {
       setHasRated(true);
-      setSavedRating(parseInt(rating, 10));
+      setSavedRating(saved);
     }
-    
+
     // Generate or retrieve a unique user ID
-    const existingId = localStorage.getItem('portfolioUserId');
+    const existingId = safeGetItem('portfolioUserId');
     if (existingId) {
       setUserId(existingId);
     } else {
       const newId = createUniqueId();
       setUserId(newId);
-      localStorage.setItem('portfolioUserId', newId);
+      safeSetItem('portfolioUserId', newId);
     }
 
     // Check if feedback was already sent
-    const feedback = localStorage.getItem('portfolioFeedbackSent');
+    const feedback = safeGetItem('portfolioFeedbackSent');
     if (feedback) {
       setFeedbackSent(true);
     }
@@ -87,8 +114,8 @@ const RatingSection = () => {
       }
 
       // Store the result in localStorage for persistence on client
-      localStorage.setItem('portfolioRatingId', formData.ratingId);
-      localStorage.setItem('portfolioFeedbackSent', 'true');
+      safeSetItem('portfolioRatingId', formData.ratingId);
+      safeSetItem('portfolioFeedbackSent', 'true');
       
       // Set the state to display the rated view
       setHasRated(true);
