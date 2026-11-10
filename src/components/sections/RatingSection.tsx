@@ -93,8 +93,6 @@ const RatingSection = () => {
         _subject: `New Portfolio Rating: ${rating} stars`, // Add subject line for email
       };
 
-      console.log('Submitting rating to Formspree:', formData);
-
       // Send to Formspree endpoint - using proper form submission format
       const response = await fetch('https://formspree.io/f/maneawkk', {
         method: 'POST',
@@ -106,8 +104,6 @@ const RatingSection = () => {
       });
 
       const responseData = await response.json();
-      
-      console.log('Formspree response:', responseData);
 
       if (!response.ok) {
         throw new Error(responseData.error || 'Network response was not ok');
@@ -177,10 +173,7 @@ const RatingSection = () => {
                   <p className="text-lg mb-6 text-center">
                     How would you rate my portfolio?
                   </p>
-                  <StarRating 
-                    onChange={(rating) => console.log(`Rated: ${rating} stars`)}
-                    onSave={saveRating}
-                  />
+                  <StarRating onSave={saveRating} />
                   <p className="mt-4 text-muted-foreground text-center text-sm">
                     Your feedback helps me improve and create better experiences!
                   </p>
