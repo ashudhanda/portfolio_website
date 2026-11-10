@@ -13,6 +13,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+// Names already injected into the document head, so a repeated call
+// (e.g. Fast Refresh re-running this module) reuses the existing <style>
+// element instead of appending a duplicate one.
+const registeredAnimations = new Set<string>();
+
 /**
  * Inject a keyframe-based animation into the document head at runtime.
  *
@@ -20,9 +25,10 @@ export function cn(...inputs: ClassValue[]) {
  * class named `.animate-<name>`, appends it to a fresh <style> element, and
  * returns the utility class name. Safe to call outside the browser: it is a
  * no-op when `document` is undefined (e.g. during SSR or prerendering).
+ * Registering the same name twice is a no-op after the first injection.
  */
 export function createAnimationClass(name: string, keyframes: object, settings: string) {
-  if (typeof document !== 'undefined') {
+  if (typeof document !== 'undefined' && !registeredAnimations.has(name)) {
     const style = document.createElement('style');
     const keyframeString = Object.entries(keyframes)
       .map(([key, value]) => {
@@ -35,8 +41,9 @@ export function createAnimationClass(name: string, keyframes: object, settings: 
     
     style.textContent = `@keyframes ${name} { ${keyframeString} } .animate-${name} { animation: ${name} ${settings}; }`;
     document.head.appendChild(style);
+    registeredAnimations.add(name);
   }
-  
+
   return `animate-${name}`;
 }
 
