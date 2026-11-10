@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,6 +22,18 @@ const formSchema = z.object({
 const NewsletterSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  // Holds the simulated-submit timer so it can be cancelled if the visitor
+  // navigates away mid-submit; otherwise the delayed toast + form.reset()
+  // would fire after unmount.
+  const submitTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (submitTimerRef.current !== null) {
+        window.clearTimeout(submitTimerRef.current);
+      }
+    };
+  }, []);
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,7 +47,7 @@ const NewsletterSection = () => {
     setIsSubmitting(true);
     
     // Simulate API request delay
-    setTimeout(() => {
+    submitTimerRef.current = window.setTimeout(() => {
       toast({
         title: "Subscription successful!",
         description: `Thanks, ${values.name}! You've been added to the newsletter list.`,
