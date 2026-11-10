@@ -25,18 +25,18 @@ export const TimelineItem = ({
 }: TimelineItemProps) => {
   return (
     <div className={cn("relative pl-10 pb-10 last:pb-0", className)}>
-      {/* Timeline vertical line */}
-      <div className="absolute left-0 top-1 bottom-0 w-px bg-border"></div>
+      {/* Timeline vertical line (decorative) */}
+      <div className="absolute left-0 top-1 bottom-0 w-px bg-border" aria-hidden="true"></div>
       
-      {/* Timeline dot */}
-      <div className="absolute left-[-8px] top-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+      {/* Timeline dot (decorative) */}
+      <div className="absolute left-[-8px] top-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center" aria-hidden="true">
         <div className="w-2 h-2 rounded-full bg-primary-foreground"></div>
       </div>
       
       {/* Timeline content */}
       <div className="glass p-4 rounded-lg">
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-primary">{icon}</span>
+          <span className="text-primary" aria-hidden="true">{icon}</span>
           <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-sm">
             {year}
           </span>
