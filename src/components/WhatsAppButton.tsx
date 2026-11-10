@@ -54,7 +54,9 @@ const WhatsAppButton = ({
   const handleClick = () => {
     // Format the WhatsApp URL with the phoneNumber prop and encoded message
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+    // "noopener,noreferrer" so the opened wa.me tab cannot reach back to
+    // this page through window.opener (reverse tabnabbing).
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
