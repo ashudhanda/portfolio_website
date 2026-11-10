@@ -46,22 +46,22 @@ const HeroSection = () => {
           <div className="md:col-span-8 space-y-4 md:space-y-6 text-center md:text-left">
             <ScrollReveal delay={200} direction="left">
               <div className="inline-block glass px-3 py-1.5 rounded-full mb-2 text-xs sm:text-sm">
-                <span className="text-primary">✦</span> UI/UX Designer & Software
-                Developer <span className="ml-1">✦</span>
+                <span className="text-primary" aria-hidden="true">✦</span> UI/UX Designer & Software
+                Developer <span className="ml-1" aria-hidden="true">✦</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={400} direction="left">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Hi, I'm <span className="text-gradient">Mwaki Denis</span>{" "}
-                <span className="inline-block animate-bounce">👋</span>
+                <span className="inline-block animate-bounce" aria-hidden="true">👋</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal delay={600} direction="left">
               <p className="text-sm sm:text-base md:text-xl text-muted-foreground">
                 Driven by quality and performance mindset, I craft elegant
-                products that users love ❤️ and businesses value 💻. I'm
+                products that users love <span aria-hidden="true">❤️</span> and businesses value <span aria-hidden="true">💻</span>. I'm
                 primarily focusing on design, scalable architecture,
                 algorithmic efficiency, and resilient deployment.
               </p>
@@ -70,7 +70,7 @@ const HeroSection = () => {
             <ScrollReveal delay={800} direction="left">
               <div className="pt-4 flex flex-col sm:flex-row justify-center md:justify-start gap-3">
                 <Button size={isMobile ? "default" : "lg"} asChild className="w-full sm:w-auto">
-                  <a href="#contact">Get in touch 📩</a>
+                  <a href="#contact">Get in touch <span aria-hidden="true">📩</span></a>
                 </Button>
                 <Button
                   variant="outline"
@@ -78,7 +78,7 @@ const HeroSection = () => {
                   asChild
                   className="w-full sm:w-auto"
                 >
-                  <a href="#projects">View my work 👀</a>
+                  <a href="#projects">View my work <span aria-hidden="true">👀</span></a>
                 </Button>
               </div>
             </ScrollReveal>
