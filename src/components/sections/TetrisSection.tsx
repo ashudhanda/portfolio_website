@@ -27,12 +27,19 @@ class Controller {
   #dropTimerId = null;
   #isPlaying = false;
   #onGameStateChange;
+  // Bound handlers, stored once so destroy() can remove the exact
+  // listeners added in #initializeEventListeners (a fresh .bind() each
+  // time would never match for removeEventListener).
+  #boundKeyDown;
+  #boundKeyUp;
 
   constructor(game, view, onGameStateChange) {
     this.#game = game;
     this.#view = view;
     this.#onGameStateChange = onGameStateChange;
 
+    this.#boundKeyDown = this.#handleKeyDown.bind(this);
+    this.#boundKeyUp = this.#handleKeyUp.bind(this);
     this.#initializeEventListeners();
     this.#view.renderStartScreen();
   }
@@ -41,9 +48,19 @@ class Controller {
     return this.#isPlaying;
   }
 
+  // Tear down everything the controller owns: drop timer plus the
+  // document key listeners. The owning component calls this from its
+  // effect cleanup so navigating away stops the game instead of leaving
+  // listeners and an interval running on a detached canvas.
+  destroy() {
+    this.#stopDropTimer();
+    document.removeEventListener("keydown", this.#boundKeyDown);
+    document.removeEventListener("keyup", this.#boundKeyUp);
+  }
+
   #initializeEventListeners() {
-    document.addEventListener("keydown", this.#handleKeyDown.bind(this));
-    document.addEventListener("keyup", this.#handleKeyUp.bind(this));
+    document.addEventListener("keydown", this.#boundKeyDown);
+    document.addEventListener("keyup", this.#boundKeyUp);
   }
 
   #update() {
@@ -674,11 +691,13 @@ const TetrisSection = () => {
   }, [isGamePlaying]);
 
   useEffect(() => {
-    if (canvasRef.current) {
-      const game = new Game();
-      const view = new View(canvasRef.current, 480, 640, 20, 10);
-      const controller = new Controller(game, view, handleGameStateChange);
-    }
+    if (!canvasRef.current) return;
+    const game = new Game();
+    const view = new View(canvasRef.current, 480, 640, 20, 10);
+    const controller = new Controller(game, view, handleGameStateChange);
+    // Unmount (e.g. navigating to /blog) destroys the controller so its
+    // document listeners and drop timer do not outlive the section.
+    return () => controller.destroy();
   }, []);
 
   return (
