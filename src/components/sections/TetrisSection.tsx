@@ -9,13 +9,15 @@ import SectionHeading from "@/components/SectionHeading";
 
 // Tetris Game Classes
 class Controller {
-  static #KEY_CODES = {
-    ENTER: 13,
-    SPACE: 32,
-    LEFT_ARROW: 37,
-    UP_ARROW: 38,
-    RIGHT_ARROW: 39,
-    DOWN_ARROW: 40,
+  // event.key values (keyCode is deprecated and removed from the
+  // KeyboardEvent spec's recommended path; browsers always populate key).
+  static #KEYS = {
+    ENTER: "Enter",
+    SPACE: " ",
+    LEFT_ARROW: "ArrowLeft",
+    UP_ARROW: "ArrowUp",
+    RIGHT_ARROW: "ArrowRight",
+    DOWN_ARROW: "ArrowDown",
   };
 
   static #INITIAL_SPEED = 1000;
@@ -120,30 +122,30 @@ class Controller {
   #handleKeyDown(event) {
     const gameState = this.#game.getState();
 
-    switch (event.keyCode) {
-      case Controller.#KEY_CODES.SPACE:
-      case Controller.#KEY_CODES.ENTER:
+    switch (event.key) {
+      case Controller.#KEYS.SPACE:
+      case Controller.#KEYS.ENTER:
         this.#handlePauseOrRestart(gameState);
         break;
-      case Controller.#KEY_CODES.LEFT_ARROW:
+      case Controller.#KEYS.LEFT_ARROW:
         if (this.#isPlaying && !gameState.isGameOver) {
           this.#game.moveTetrominoLeft();
           this.#updateView();
         }
         break;
-      case Controller.#KEY_CODES.UP_ARROW:
+      case Controller.#KEYS.UP_ARROW:
         if (this.#isPlaying && !gameState.isGameOver) {
           this.#game.rotateTetromino();
           this.#updateView();
         }
         break;
-      case Controller.#KEY_CODES.RIGHT_ARROW:
+      case Controller.#KEYS.RIGHT_ARROW:
         if (this.#isPlaying && !gameState.isGameOver) {
           this.#game.moveTetrominoRight();
           this.#updateView();
         }
         break;
-      case Controller.#KEY_CODES.DOWN_ARROW:
+      case Controller.#KEYS.DOWN_ARROW:
         if (this.#isPlaying && !gameState.isGameOver) {
           this.#stopDropTimer();
           this.#game.moveTetrominoDown();
@@ -154,7 +156,7 @@ class Controller {
   }
 
   #handleKeyUp(event) {
-    if (event.keyCode === Controller.#KEY_CODES.DOWN_ARROW && this.#isPlaying) {
+    if (event.key === Controller.#KEYS.DOWN_ARROW && this.#isPlaying) {
       this.#startDropTimer();
     }
   }
