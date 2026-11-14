@@ -315,7 +315,7 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
             <div className="flex items-center gap-2">
               <div className="relative">
                 <div className="h-10 w-10 rounded-full overflow-hidden">
-                  <img src="/myPic.jpg" alt="Denis Mwaki" className="h-full w-full object-cover" />
+                  <img src="/20240814_132224.jpg" alt="Denis Mwaki" className="h-full w-full object-cover" />
                 </div>
                 <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-background"></span>
               </div>
