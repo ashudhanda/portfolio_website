@@ -188,7 +188,30 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
 
   const goToNextStep = (nextStepId: string) => {
     const step = CONVERSATION_STEPS[nextStepId];
-    if (!step) return;
+    if (!step) {
+      // Some options point at steps that were never defined (e.g.
+      // "general-life-more", "sandbox-mode"): without a fallback the click
+      // silently does nothing. Echo the visitor's choice, then say so.
+      const option = CONVERSATION_STEPS[currentStep]?.options?.find(opt => opt.nextId === nextStepId);
+      if (option) {
+        const userMessage: ChatMessageProps = {
+          content: option.text,
+          timestamp: new Date(),
+          sender: "user",
+          status: "delivered"
+        };
+        setMessages(prev => [...prev, userMessage]);
+      }
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          content: "That part of the tour isn't built yet — pick another option and I'll keep going!",
+          timestamp: new Date(),
+          sender: "admin",
+          status: "read",
+        }]);
+      }, 500);
+      return;
+    }
 
     setCurrentStep(nextStepId);
 
