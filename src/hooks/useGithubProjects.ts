@@ -1,17 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { GithubRepo } from '@/types';
-
-// Whitelist of repos to display
-const FEATURED_REPOS = [
-  'Mpesa-Based_Wi-Fi-Hotspot_Billing_System',
-  'HornBill',
-  'shamba-smart-scan',
-  'react-portfolio',
-  'denis-portfolio',
-  'my-portfolio',
-  'wifi-billing-system',
-  'mpesa-integration',
-];
+// Single source of truth for the whitelist: data/projects.ts also documents
+// it as the repo list fetched live by this hook — keep one copy only.
+import { GITHUB_WHITELIST } from '@/data/projects';
 
 export interface TransformedProject {
   id: string;
@@ -90,7 +81,7 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
 
       // Filter repos by whitelist
       const filteredRepos = data.filter((repo) => {
-        return FEATURED_REPOS.includes(repo.name);
+        return GITHUB_WHITELIST.includes(repo.name);
       });
 
       // Transform and sort repos
