@@ -4,6 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import SectionHeading from "@/components/SectionHeading";
 import ProjectCard from "@/components/ProjectCard";
 import { Filter } from "lucide-react";
+import type { Project } from "@/types";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,19 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-// Define project type
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  imageSrc: string;
-  tags: string[];
-  liveDemoUrl?: string;
-  githubUrl?: string;
-  year: string;
-  type: string;
-};
 
 // Create projects data
 const projects: Project[] = [
