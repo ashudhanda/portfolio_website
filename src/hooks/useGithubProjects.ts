@@ -27,7 +27,7 @@ interface UseGithubProjectsReturn {
 
 /**
  * Fetches the user's public repos from the GitHub REST API, keeps only the
- * FEATURED_REPOS whitelist, and transforms each one into the shape the
+ * GITHUB_WHITELIST repos, and transforms each one into the shape the
  * portfolio project cards expect (title, tags, stars, forks, links...),
  * finally sorting by star count descending. An optional
  * VITE_GITHUB_TOKEN raises the unauthenticated API rate limit.
