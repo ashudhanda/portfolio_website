@@ -19,7 +19,9 @@ interface StarRatingProps {
  * The rating is also persisted to localStorage under 'portfolioRating'
  * as a durable record of the visitor's vote; if `onSave` is provided the
  * value is also posted to the backend and a failed save clears the lock
- * so the visitor can retry.
+ * so the visitor can retry. A widget mounted with an existing rating
+ * (initialRating > 0, e.g. the already-rated view) starts locked so the
+ * saved vote cannot be re-cast from the read-only display.
  */
 const StarRating = ({
   maxStars = 5,
@@ -30,7 +32,9 @@ const StarRating = ({
 }: StarRatingProps) => {
   const [rating, setRating] = useState(initialRating);
   const [hoverRating, setHoverRating] = useState(0);
-  const [isRated, setIsRated] = useState(false);
+  // Locked from the start when mounted with an existing rating, so the
+  // already-rated display cannot cast a second vote.
+  const [isRated, setIsRated] = useState(initialRating > 0);
   const [isSaving, setIsSaving] = useState(false);
 
   const handleRating = async (selectedRating: number) => {
