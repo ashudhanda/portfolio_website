@@ -70,7 +70,9 @@ const Navbar = () => {
   }, []);
 
   // Close menu when clicking a link on mobile
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  // Functional update: the toggle can fire twice in quick succession
+  // (double-tap), and reading isMenuOpen directly would use a stale value.
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
   // Close menu when window is resized to desktop size
