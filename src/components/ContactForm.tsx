@@ -77,7 +77,7 @@ const ContactForm = () => {
           description: 'Please try again or contact me directly via email.'
         });
       }
-    } catch (error) {
+    } catch {
       toast.error('Something went wrong', {
         description: 'Please try again or contact me directly via email.'
       });
