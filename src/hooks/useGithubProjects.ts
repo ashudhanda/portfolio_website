@@ -68,6 +68,9 @@ export const useGithubProjects = (): UseGithubProjectsReturn => {
       );
 
       if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Invalid GitHub token. Check VITE_GITHUB_TOKEN.');
+        }
         if (response.status === 403) {
           throw new Error('API rate limit exceeded. Please try again later.');
         }
