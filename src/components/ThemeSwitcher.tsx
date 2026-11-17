@@ -1,59 +1,44 @@
 
-import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 
 /**
  * Theme toggle button with an animated sun/moon icon swap.
  *
- * Behaviour: defaults to dark mode on first visit, restores the stored
- * preference from localStorage on mount, and keeps the DOM in sync by
- * adding/removing the `dark` class on <html>. Every toggle persists the
- * new value and shows a short toast confirming the switch.
+ * Behaviour: defaults to dark mode on first visit (see the ThemeProvider in
+ * App.tsx) and delegates all persistence and DOM work to next-themes via
+ * useTheme() — this component only flips the theme and shows a toast.
+ * An earlier version kept its own localStorage + <html> class bookkeeping,
+ * which duplicated the provider's state and could drift from it.
  */
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("dark"); // Default to dark
+  // next-themes owns the stored preference and the `dark` class on <html>.
+  // theme is undefined until the provider hydrates, so fall back to the
+  // default ("dark") for the first paint.
+  const { theme, setTheme } = useTheme();
+  const currentTheme = theme ?? "dark";
   const { toast } = useToast();
 
-  // Initialize theme from localStorage or default to dark
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    
-    if (storedTheme === "light") {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    } else {
-      // Default to dark mode if no preference is stored
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
-  }, []);
-
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    
-    // Update DOM and localStorage
+
     if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
       toast({
         title: "Dark Mode Activated",
         description: "Your eyes will thank you later! 😎",
         duration: 2000,
       });
     } else {
-      document.documentElement.classList.remove("dark");
       toast({
         title: "Light Mode Activated",
         description: "Brightness is on! ☀️",
         duration: 2000,
       });
     }
-    
-    localStorage.setItem("theme", newTheme);
   };
 
   return (
@@ -62,19 +47,19 @@ const ThemeSwitcher = () => {
       size="icon" 
       onClick={toggleTheme}
       className={`relative rounded-full w-10 h-10 flex items-center justify-center transition-all duration-500 overflow-hidden ${
-        theme === "dark" 
+        currentTheme === "dark" 
           ? "bg-primary/10 hover:bg-primary/20 text-primary" 
           : "bg-secondary hover:bg-secondary/80"
       }`}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${currentTheme === 'light' ? 'dark' : 'light'} mode`}
     >
       <div className="relative w-full h-full flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.div
-            key={theme}
+            key={currentTheme}
             initial={{ 
               opacity: 0, 
-              rotate: theme === "light" ? 45 : -45,
+              rotate: currentTheme === "light" ? 45 : -45,
               scale: 0.2
             }}
             animate={{ 
@@ -84,7 +69,7 @@ const ThemeSwitcher = () => {
             }}
             exit={{ 
               opacity: 0, 
-              rotate: theme === "light" ? -45 : 45,
+              rotate: currentTheme === "light" ? -45 : 45,
               scale: 0.2
             }}
             transition={{
@@ -95,7 +80,7 @@ const ThemeSwitcher = () => {
             }}
             className="absolute inset-0 flex items-center justify-center"
           >
-            {theme === "light" ? (
+            {currentTheme === "light" ? (
               <Moon className="h-[1.2rem] w-[1.2rem]" />
             ) : (
               <Sun className="h-[1.2rem] w-[1.2rem]" />
@@ -105,12 +90,12 @@ const ThemeSwitcher = () => {
         
         {/* Background animation */}
         <motion.div
-          key={`${theme}-bg`}
+          key={`${currentTheme}-bg`}
           className="absolute inset-0 rounded-full"
           initial={{ scale: 0 }}
           animate={{ 
             scale: [0, 20, 0],
-            backgroundColor: theme === "dark" ? "#8b5cf6" : "#fbbf24"
+            backgroundColor: currentTheme === "dark" ? "#8b5cf6" : "#fbbf24"
           }}
           transition={{ duration: 1.5 }}
         />
