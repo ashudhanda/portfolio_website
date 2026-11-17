@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Code, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "./ThemeSwitcher";
@@ -26,17 +26,21 @@ interface NavLink {
 /**
  * Returns true when the given nav link matches the currently active section.
  * In-page anchors compare against scroll-spy state; the Blog link is a real
- * route rather than an anchor, so it compares against the current pathname.
+ * route rather than an anchor, so it compares against the current pathname
+ * (read via useLocation, so navigating Home <-> Blog updates the highlight
+ * even when no scroll event fires).
  */
-const isLinkActive = (link: NavLink, activeSection: string): boolean =>
+const isLinkActive = (link: NavLink, activeSection: string, pathname: string): boolean =>
   link.href === "/blog"
-    ? window.location.pathname === "/blog"
+    ? pathname === "/blog"
     : link.href.replace("/#", "") === activeSection;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  // Reactive pathname for the Blog link's active state (see isLinkActive).
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,7 +136,7 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
           <ul className="flex items-center gap-3 lg:gap-6">
             {navLinks.map((link) => {
-              const isActive = isLinkActive(link, activeSection);
+              const isActive = isLinkActive(link, activeSection, pathname);
                 
               return (
                 <li key={link.name}>
@@ -193,7 +197,7 @@ const Navbar = () => {
         <nav className="container py-4 px-4">
           <ul className="flex flex-col gap-1">
             {navLinks.map((link) => {
-              const isActive = isLinkActive(link, activeSection);
+              const isActive = isLinkActive(link, activeSection, pathname);
               
               return (
                 <li key={link.name}>
