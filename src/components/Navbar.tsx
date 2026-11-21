@@ -114,7 +114,10 @@ const Navbar = () => {
       <div className="container flex items-center justify-between px-4 mx-auto max-w-[1400px]">
         <Link 
           to="/" 
-          className="font-heading text-lg sm:text-xl font-bold flex items-center gap-2"
+          // `group` powers the logo halo's group-hover:opacity-100 /
+          // group-hover:duration-200 below; without it those classes
+          // never fire and the hover effect is dead.
+          className="group font-heading text-lg sm:text-xl font-bold flex items-center gap-2"
           onClick={closeMenu}
         >
           {/* Logo mark: gradient halo + icon, readable in light and dark modes */}
