@@ -21,20 +21,24 @@ import { blogPosts } from '@/data/blogData';
  */
 const BlogPost = () => {
   const { id } = useParams();
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<(typeof blogPosts)[number] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     // Simulate loading from an API
     setIsLoading(true);
-    
-    setTimeout(() => {
+
+    // Clear on unmount / id change so a fast navigation away never calls
+    // setPost/setIsLoading after this page is gone.
+    const timer = window.setTimeout(() => {
       if (id) {
         const foundPost = blogPosts.find(post => post.id.toString() === id);
-        setPost(foundPost);
+        setPost(foundPost ?? null);
       }
       setIsLoading(false);
     }, 300);
+
+    return () => window.clearTimeout(timer);
   }, [id]);
   
   if (isLoading) {
