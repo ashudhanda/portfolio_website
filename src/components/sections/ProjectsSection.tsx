@@ -5,6 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 import ProjectCard from "@/components/ProjectCard";
 import { Filter } from "lucide-react";
 import type { Project } from "@/types";
+import { FEATURED_PROJECT } from "@/data/projects";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,19 +16,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-// Create projects data
+// Projects data: the featured project is the single copy in
+// src/data/projects.ts (the local duplicate had drifted — it was missing
+// the space in "MikroTik control (MikroTik RB750UPr2)").
 const projects: Project[] = [
-  {
-    id: "1",
-    title: "Mpesa-Based Wi-Fi Hotspot Billing System 🧾",
-    description: "A Wi-Fi hotspot billing system with M-Pesa STK Push, Okoa Internet option, time-based access, MikroTik control(MikroTik RB750UPr2), real-time monitoring, and a web-based admin dashboard.",
-    imageSrc: "/JobPortal.png", 
-    tags: ["React", "Node.js", "Next.js", "MySQL", "Prisma", "M-Pesa", "MikroTik"],
-    liveDemoUrl: "https://anotherone-production-dcdb.up.railway.app",
-    githubUrl: "https://github.com/mwakidenis/Mpesa-Based_Wi-Fi-Hotspot_Billing_System", 
-    year: "2025",
-    type: "Web App"
-  },
+  FEATURED_PROJECT,
   {
     id: "2",
     title: "HornBill 🚀📡",
