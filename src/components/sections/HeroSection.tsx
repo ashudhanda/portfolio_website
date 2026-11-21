@@ -101,7 +101,10 @@ const HeroSection = () => {
                     className="absolute inset-0 rounded-full opacity-80"
                     style={{
                       background:
-                        "radial-gradient(circle at center, transparent 60%, rgba(var(--primary), 0.2) 100%)",
+                        // --primary is a space-separated HSL triplet, so rgba()
+                        // is invalid here; use the hsl() slash-alpha form the
+                        // rest of the codebase uses (see src/index.css).
+                        "radial-gradient(circle at center, transparent 60%, hsl(var(--primary) / 0.2) 100%)",
                     }}
                   />
 
