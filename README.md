@@ -106,7 +106,7 @@ VITE_GITHUB_USERNAME=your_github_username
 npm run dev
 ```
 
-The site will be available at [http://localhost:5173](http://localhost:5173)
+The site will be available at [http://localhost:8080](http://localhost:8080) (port 8080 is set in `vite.config.ts`)
 
 ## 🧾 Available Scripts
 
