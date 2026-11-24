@@ -75,6 +75,7 @@ const ProjectCard = ({
         <img 
           src={imageSrc} 
           alt={`${title} project screenshot`} 
+          loading="lazy"
           className="w-full h-auto object-cover aspect-[16/10] hover:scale-105 transition-transform duration-500"
         />
       </div>
