@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -36,6 +36,18 @@ const StarRating = ({
   // already-rated display cannot cast a second vote.
   const [isRated, setIsRated] = useState(initialRating > 0);
   const [isSaving, setIsSaving] = useState(false);
+
+  // A rating can arrive after mount (e.g. the parent loads the saved vote
+  // from localStorage asynchronously): adopt it and lock the widget instead
+  // of staying at the mount-time initialRating of 0. The isRated guard
+  // keeps a vote the visitor just cast from being overwritten by a stale
+  // prop.
+  useEffect(() => {
+    if (initialRating > 0 && !isRated) {
+      setRating(initialRating);
+      setIsRated(true);
+    }
+  }, [initialRating, isRated]);
 
   const handleRating = async (selectedRating: number) => {
     if (isRated || isSaving) return;
