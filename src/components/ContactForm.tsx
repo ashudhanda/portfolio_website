@@ -10,12 +10,17 @@ import { Send } from 'lucide-react';
 // as email to the site owner; no backend of our own is involved).
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mrbpogeb";
 
+// How long a submission may take before it is aborted (see handleSubmit).
+const SUBMIT_TIMEOUT_MS = 15000;
+
 /**
  * Contact form that posts submissions to Formspree via fetch.
  *
  * On success it shows a confirmation toast and resets the fields; on failure
  * it shows an error toast. The submit button is disabled while a request is
- * in flight to prevent double submissions.
+ * in flight to prevent double submissions. The request aborts after
+ * SUBMIT_TIMEOUT_MS so a hung connection cannot leave the button disabled
+ * forever — the visitor gets a timeout toast instead.
  */
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -60,6 +65,9 @@ const ContactForm = () => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        // Abort a hung submission instead of leaving the button disabled
+        // forever; the TimeoutError branch below explains it to the visitor.
+        signal: AbortSignal.timeout(SUBMIT_TIMEOUT_MS),
       });
       
       if (response.ok) {
@@ -77,10 +85,18 @@ const ContactForm = () => {
           description: 'Please try again or contact me directly via email.'
         });
       }
-    } catch {
-      toast.error('Something went wrong', {
-        description: 'Please try again or contact me directly via email.'
-      });
+    } catch (err) {
+      // A timeout is the visitor's connection, not a broken form — say so
+      // instead of the generic error.
+      if (err instanceof DOMException && err.name === 'TimeoutError') {
+        toast.error('Message took too long to send', {
+          description: 'Please check your connection and try again.'
+        });
+      } else {
+        toast.error('Something went wrong', {
+          description: 'Please try again or contact me directly via email.'
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
