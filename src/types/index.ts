@@ -138,9 +138,11 @@ export const ACCENT_COLORS: Record<AccentColor, { bg: string; text: string; bord
 /**
  * Returns the accent token for a 0-based position, wrapping around the
  * palette with modulo so any index (even beyond the palette length) stays
- * valid and lists cycle colors consistently across renders.
+ * valid and lists cycle colors consistently across renders. Negative
+ * indexes wrap from the end (-1 is the last color), because plain `%`
+ * yields a negative remainder in JS and `colors[-1]` would be undefined.
  */
 export const getAccentColor = (index: number): AccentColor => {
   const colors: AccentColor[] = ['blue', 'purple', 'emerald', 'amber', 'crimson', 'cyan', 'pink', 'lime'];
-  return colors[index % colors.length];
+  return colors[((index % colors.length) + colors.length) % colors.length];
 };
