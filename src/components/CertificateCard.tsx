@@ -47,6 +47,7 @@ const CertificateCard = ({
             <img
               src={imageUrl}
               alt={`${title} certificate`}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </AspectRatio>
