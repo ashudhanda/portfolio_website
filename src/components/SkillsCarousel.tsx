@@ -110,7 +110,12 @@ const SkillsCarousel = ({ skillsData }: SkillsCarouselProps) => {
         style={{ 
           WebkitOverflowScrolling: 'touch',
           scrollSnapType: 'x mandatory',
-          scrollBehavior: 'smooth'
+          // 'auto', not 'smooth': the rAF loop below sets scrollLeft every
+          // frame, and with smooth scrolling each assignment starts a new
+          // animation that never catches up — the strip crawls, and the
+          // wrap-around reset to 0 visibly rewinds through every card
+          // instead of snapping. Snapping still comes from scrollSnapType.
+          scrollBehavior: 'auto'
         }}
         onMouseEnter={pauseAutoScroll}
         onMouseLeave={resumeAutoScroll}
