@@ -32,8 +32,15 @@ interface NavLink {
  */
 const isLinkActive = (link: NavLink, activeSection: string, pathname: string): boolean =>
   link.href === "/blog"
-    ? pathname === "/blog"
+    // A blog post page (/blog/:id) is still the Blog section.
+    ? pathname === "/blog" || pathname.startsWith("/blog/")
     : link.href.replace("/#", "") === activeSection;
+
+// aria-current token for an active link: "page" for the Blog route, which
+// is a real document, and "location" for in-page anchors, which point at
+// a spot inside the current page.
+const ariaCurrentFor = (link: NavLink, active: boolean): "page" | "location" | undefined =>
+  !active ? undefined : link.href === "/blog" ? "page" : "location";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -146,6 +153,7 @@ const Navbar = () => {
                   {link.href.startsWith('/') && !link.href.includes('#') ? (
                     <Link 
                       to={link.href} 
+                      aria-current={ariaCurrentFor(link, isActive)}
                       className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-primary after:transition-all ${
                         isActive 
                           ? "text-foreground after:w-full" 
@@ -157,6 +165,7 @@ const Navbar = () => {
                   ) : (
                     <a 
                       href={link.href} 
+                      aria-current={ariaCurrentFor(link, isActive)}
                       className={`text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-primary after:transition-all ${
                         isActive 
                           ? "text-foreground after:w-full" 
@@ -207,6 +216,7 @@ const Navbar = () => {
                   {link.href.startsWith('/') && !link.href.includes('#') ? (
                     <Link 
                       to={link.href} 
+                      aria-current={ariaCurrentFor(link, isActive)}
                       className={`block py-3 px-4 rounded-lg transition-all ${
                         isActive ? "bg-primary/10 text-foreground font-medium" : "text-foreground/80 hover:bg-background hover:text-foreground"
                       }`}
@@ -217,6 +227,7 @@ const Navbar = () => {
                   ) : (
                     <a 
                       href={link.href} 
+                      aria-current={ariaCurrentFor(link, isActive)}
                       className={`block py-3 px-4 rounded-lg transition-all ${
                         isActive ? "bg-primary/10 text-foreground font-medium" : "text-foreground/80 hover:bg-background hover:text-foreground"
                       }`}
