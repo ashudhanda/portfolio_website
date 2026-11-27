@@ -51,8 +51,10 @@ const Index = () => {
     
     // Check if device is low-end based on memory and processor
     const checkDevicePerformance = () => {
-      // @ts-ignore - Some browsers support this API
-      if (navigator.deviceMemory && navigator.deviceMemory < 4) {
+      // deviceMemory is Chrome-only and absent from lib.dom, so read it
+      // through a narrow extension type instead of @ts-ignore.
+      const { deviceMemory } = navigator as Navigator & { deviceMemory?: number };
+      if (deviceMemory !== undefined && deviceMemory < 4) {
         setLowEndDevice(true);
         return;
       }
