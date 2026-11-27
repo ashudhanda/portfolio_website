@@ -129,10 +129,8 @@ const BlogPost = () => {
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <p className="lead">{post.excerpt}</p>
               
-              <p>
-                This is a full blog post content. In a real application, this would be loaded from a CMS or database.
-                The content can include rich text formatting, images, code snippets, and more.
-              </p>
+              {/* Render the post's own content field instead of filler copy. */}
+              <p>{post.content}</p>
               
               <h2>Why This Topic Matters</h2>
               
