@@ -241,39 +241,9 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
       setShowGif(null);
     }
 
-    // Handle section navigation
-    if (nextStepId === "goto-projects") {
-      const projectsElement = document.getElementById("projects-section");
-      if (projectsElement) {
-        setTimeout(() => {
-          projectsElement.scrollIntoView({ behavior: "smooth" });
-          onClose();
-        }, 1000);
-      }
-    }
-    if (nextStepId === "goto-skills") {
-      const skillsElement = document.getElementById("skills-section");
-      if (skillsElement) {
-        setTimeout(() => {
-          skillsElement.scrollIntoView({ behavior: "smooth" });
-          onClose();
-        }, 1000);
-      }
-    }
-    if (nextStepId === "goto-blog") {
-      setTimeout(() => {
-        window.location.href = "/blog";
-      }, 1000);
-    }
-    if (nextStepId === "goto-contact") {
-      const contactElement = document.getElementById("contact-section");
-      if (contactElement) {
-        setTimeout(() => {
-          contactElement.scrollIntoView({ behavior: "smooth" });
-          onClose();
-        }, 1000);
-      }
-    }
+    // NOTE: no section-navigation branches here — the "goto-*" step ids
+    // are not defined in CONVERSATION_STEPS, so goToNextStep() returns
+    // early for them above and any such branch would be unreachable.
   };
 
   const handleSendMessage = async (e?: React.FormEvent) => {
