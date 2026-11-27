@@ -150,8 +150,8 @@ const CONVERSATION_STEPS: Record<string, ConversationStep> = {
       { text: "No, That's enough", nextId: "story-mode" },
     ]
   },
-  // ... continue all steps, replacing "Marklewis" / "Marklogic" with "Denis Mwaki" / "DenisBot"
-  // This includes professional-life, sandbox-mode, action-mode, pricing-mode, etc.
+  // The steps above are the full flow; an option pointing at a step
+  // not defined here gets the not-built-yet fallback in goToNextStep().
 };
 
 const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
