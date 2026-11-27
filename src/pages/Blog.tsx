@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import SectionHeading from '@/components/SectionHeading';
 import ScrollReveal from '@/components/ScrollReveal';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, Clock, Calendar, User, Book } from 'lucide-react';
+import { ChevronLeft, Clock, Calendar } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { 
   Pagination, 
