@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
@@ -40,6 +40,8 @@ const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [lowEndDevice, setLowEndDevice] = useState(false);
   const isMobile = useIsMobile();
+  // Guards the scroll handler so at most one rAF is pending at a time.
+  const ticking = useRef(false);
 
   useEffect(() => {
     // Mark as loaded after a short delay to ensure smooth transitions
@@ -72,9 +74,14 @@ const Index = () => {
     checkDevicePerformance();
     
     const handleScroll = () => {
-      // Use requestAnimationFrame for smoother scroll event handling
+      // One rAF per scroll burst: without the guard every scroll event
+      // queues its own frame, so a fast scroll schedules dozens of
+      // redundant setShowScrollTop calls for the same paint.
+      if (ticking.current) return;
+      ticking.current = true;
       requestAnimationFrame(() => {
         setShowScrollTop(window.scrollY > 300);
+        ticking.current = false;
       });
     };
     
