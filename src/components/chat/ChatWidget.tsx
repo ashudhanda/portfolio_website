@@ -278,7 +278,10 @@ const ChatWidget = ({ isOpen, onClose }: ChatWidgetProps) => {
 
   const handleSendMessage = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (!newMessage.trim() && !CONVERSATION_STEPS[currentStep].inputRequired) return;
+    // Blank or whitespace-only input advances nothing: the "start" step's
+    // onInput() returns null for it, so without this guard a blank message
+    // would be posted and a "Welcome,   !" toast shown for no reason.
+    if (!newMessage.trim()) return;
 
     const userMessage: ChatMessageProps = {
       content: newMessage,
